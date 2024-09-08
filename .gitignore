@@ -1,0 +1,16 @@
+.DS_Store
+Thumbs.db
+
+*.log
+*.app
+*.exe
+*.war
+*.zip
+*-autosave.kra
+*.dll
+
+[Bb]in/
+[Oo]bj/
+[Bb]uild/
+[Tt]emp/
+[Ll]ogs/

@@ -1,0 +1,10 @@
+{
+    "files.exclude": {
+        "obj": true,
+    },
+    "dotnet.defaultSolution": "wind-csharp.sln",
+    "cSpell.words": [
+        "Mathf",
+        "WINDOWPOS"
+    ],
+}
