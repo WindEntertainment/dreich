@@ -5,11 +5,11 @@ using Wind.Mathf;
 
 namespace Wind
 {
-    public partial class WindEngine
+    public class WindEngine
     {
-        static private Logger? _logger;
+        private Logger _logger;
 
-        public static void Init()
+        public WindEngine()
         {
             WindServices.Instance.Register(new LoggerManager());
             _logger = new Logger("WindEngine", WindServices.Instance.Get<LoggerManager>());
@@ -28,11 +28,31 @@ namespace Wind
             }
             catch (Exception ex)
             {
-                _logger?.Error(ex.Message);
+                _logger.Error(ex.Message);
             }
         }
 
-        public static void Dispose()
+        public void Loop()
+        {
+            _logger.Info("Launch engine loop");
+
+            bool quit = false;
+
+            while (!quit)
+            {
+                while (SDL_PollEvent(out SDL_Event e) != 0)
+                {
+                    if (e.type == SDL_EventType.SDL_QUIT)
+                    {
+                        quit = true;
+                    }
+                }
+            }
+
+            Dispose();
+        }
+
+        private void Dispose()
         {
             SDL_Quit();
         }

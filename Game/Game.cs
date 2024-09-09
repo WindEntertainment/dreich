@@ -4,7 +4,9 @@ internal class Game
 {
     public static void Main(String[] args)
     {
-        WindEngine.Init();
-        WindEngine.Dispose();
+        var engine = new WindEngine();
+        // var assetDatabase = WindServices.Get<AssetDatabase>();
+        // assetDatabase.LoadBundle("Data/Main");
+        engine.Loop();
     }
 }
