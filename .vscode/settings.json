@@ -5,6 +5,7 @@
     "dotnet.defaultSolution": "wind-csharp.sln",
     "cSpell.words": [
         "Mathf",
+        "OPENGL",
         "WINDOWPOS"
     ],
 }

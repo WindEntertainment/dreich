@@ -8,6 +8,7 @@ namespace Wind
     public class WindEngine
     {
         private Logger _logger;
+        private Window _window;
 
         public WindEngine()
         {
@@ -21,10 +22,11 @@ namespace Wind
 
             try
             {
-                WindServices.Instance.Register(new Window(
+                _window = new Window(
                     "Hello World!",
                     new Vector2i(800, 600)
-                ));
+                );
+                WindServices.Instance.Register(_window);
             }
             catch (Exception ex)
             {
@@ -38,15 +40,17 @@ namespace Wind
 
             bool quit = false;
 
+            SDL_GL_CreateContext()
+
             while (!quit)
             {
                 while (SDL_PollEvent(out SDL_Event e) != 0)
                 {
                     if (e.type == SDL_EventType.SDL_QUIT)
-                    {
                         quit = true;
-                    }
                 }
+
+                OpenGL.Gl.ClearColor(0, 0, 0, 0);
             }
 
             Dispose();

@@ -18,7 +18,7 @@ namespace Wind
                 SDL_WINDOWPOS_CENTERED,
                 size.x,
                 size.y,
-                SDL_WindowFlags.SDL_WINDOW_SHOWN
+                SDL_WindowFlags.SDL_WINDOW_SHOWN | SDL_WindowFlags.SDL_WINDOW_OPENGL
             );
 
             if (_window == IntPtr.Zero)

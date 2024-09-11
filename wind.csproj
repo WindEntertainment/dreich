@@ -10,6 +10,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="OpenGL.Net" Version="0.8.4" />
     <PackageReference Include="SDL2-CS.NetCore" Version="2.0.8" />
   </ItemGroup>
 
