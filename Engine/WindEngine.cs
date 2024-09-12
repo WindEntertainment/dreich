@@ -21,6 +21,7 @@ namespace Wind {
           "Hello World!",
           new Vector2i(800, 600)
       );
+
       WindServices.Instance.Register(_window);
     }
 
@@ -30,11 +31,14 @@ namespace Wind {
       bool quit = false;
 
       while (!quit) {
-        while (SDL_PollEvent(out SDL_Event e) != 0) {
-          if (e.type == SDL_EventType.SDL_QUIT)
-            quit = true;
-        }
+        while (!quit) {
+          while (SDL_PollEvent(out SDL_Event e) != 0) {
+            if (e.type == SDL_EventType.SDL_QUIT)
+              quit = true;
+          }
 
+          // OpenGL.Gl.ClearColor(0, 0, 0, 0);
+        }
         // OpenGL.Gl.ClearColor(0, 0, 0, 0);
       }
 
@@ -46,3 +50,4 @@ namespace Wind {
     }
   }
 }
+
