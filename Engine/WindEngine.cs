@@ -3,15 +3,12 @@ using static SDL2.SDL;
 using Wind.Logging;
 using Wind.Mathf;
 
-namespace Wind
-{
-  public class WindEngine
-  {
+namespace Wind {
+  public class WindEngine {
     private Logger _logger;
     private Window _window;
 
-    public WindEngine()
-    {
+    public WindEngine() {
       WindServices.Instance.Register(new LoggerManager());
       _logger = new Logger("WindEngine", WindServices.Instance.Get<LoggerManager>());
 
@@ -24,21 +21,16 @@ namespace Wind
           "Hello World!",
           new Vector2i(800, 600)
       );
-
       WindServices.Instance.Register(_window);
-
     }
 
-    public void Loop()
-    {
+    public void Loop() {
       _logger.Info("Launch engine loop");
 
       bool quit = false;
 
-      while (!quit)
-      {
-        while (SDL_PollEvent(out SDL_Event e) != 0)
-        {
+      while (!quit) {
+        while (SDL_PollEvent(out SDL_Event e) != 0) {
           if (e.type == SDL_EventType.SDL_QUIT)
             quit = true;
         }
@@ -49,8 +41,7 @@ namespace Wind
       Dispose();
     }
 
-    private void Dispose()
-    {
+    private void Dispose() {
       SDL_Quit();
     }
   }
