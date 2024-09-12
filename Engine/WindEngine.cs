@@ -40,8 +40,6 @@ namespace Wind
 
             bool quit = false;
 
-            SDL_GL_CreateContext()
-
             while (!quit)
             {
                 while (SDL_PollEvent(out SDL_Event e) != 0)
@@ -50,7 +48,7 @@ namespace Wind
                         quit = true;
                 }
 
-                OpenGL.Gl.ClearColor(0, 0, 0, 0);
+                // OpenGL.Gl.ClearColor(0, 0, 0, 0);
             }
 
             Dispose();
