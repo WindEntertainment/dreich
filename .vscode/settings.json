@@ -1,11 +1,7 @@
 {
-    "files.exclude": {
-        "obj": true,
-    },
-    "dotnet.defaultSolution": "wind-csharp.sln",
-    "cSpell.words": [
-        "Mathf",
-        "OPENGL",
-        "WINDOWPOS"
-    ],
+  "files.exclude": {
+    "obj": true
+  },
+  "dotnet.defaultSolution": "wind-csharp.sln",
+  "cSpell.words": ["codepoint", "KEYCODES", "Mathf", "OPENGL", "WINDOWPOS"]
 }
