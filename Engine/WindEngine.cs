@@ -17,16 +17,12 @@ namespace Wind {
       if (SDL_Init(SDL_INIT_VIDEO) < 0)
         _logger.Error($"SDL could not initialize! SDL_Error: {SDL_GetError()}");
 
-      try {
-        _window = new Window(
+      _window = new Window(
           "Hello World!",
           new Vector2i(800, 600)
-        );
-        WindServices.Instance.Register(_window);
-      }
-      catch (Exception ex) {
-        _logger.Error(ex.Message);
-      }
+      );
+
+      WindServices.Instance.Register(_window);
     }
 
     public void Loop() {
@@ -35,11 +31,14 @@ namespace Wind {
       bool quit = false;
 
       while (!quit) {
-        while (SDL_PollEvent(out SDL_Event e) != 0) {
-          if (e.type == SDL_EventType.SDL_QUIT)
-            quit = true;
-        }
+        while (!quit) {
+          while (SDL_PollEvent(out SDL_Event e) != 0) {
+            if (e.type == SDL_EventType.SDL_QUIT)
+              quit = true;
+          }
 
+          // OpenGL.Gl.ClearColor(0, 0, 0, 0);
+        }
         // OpenGL.Gl.ClearColor(0, 0, 0, 0);
       }
 
@@ -51,3 +50,4 @@ namespace Wind {
     }
   }
 }
+
