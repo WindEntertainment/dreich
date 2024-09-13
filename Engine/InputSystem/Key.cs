@@ -4,7 +4,6 @@ using static SDL2.SDL;
 
 namespace Wind {
   public partial class InputSystem {
-
     public struct Key(Keycode keycode = Keycode.Unknown, KeyAction action = KeyAction.Unknown) {
       public Keycode keycode = keycode;
       public KeyAction action = action;

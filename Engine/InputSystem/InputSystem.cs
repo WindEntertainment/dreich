@@ -8,112 +8,114 @@ using static SDL2.SDL;
 namespace Wind {
   public partial class InputSystem() {
 
-    InputSystemContext context = new InputSystemContext();
+    InputSystemContext context = new();
 
-    void groupedEventToCycle(Key keycode) {
+    // active / inactive state
+
+    void GroupedEventToCycle(Key keycode) {
       if (!keycodeTriggers.TryGetValue(keycode, out Callbacks? action)) return;
       action?.Invoke(context);
     }
 
-    public void onKeyPress(string sdlWindow, SDL_Keycode key, int scancode, SDL_EventType action, int mods) {
-      Key mappedKey = mapSdlKeyCode(key, action);
+    public void OnKeyPress(string sdlWindow, SDL_Keycode key, int scancode, SDL_EventType action, int mods) {
+      Key mappedKey = MapSdlKeyCode(key, action);
 
       switch (mappedKey.action) {
         case KeyAction.Pressed:
-          context.KeyboardContext.addPressedKey(mappedKey.keycode);
-          context.KeyboardContext.removeHeldKey(mappedKey.keycode);
-          context.KeyboardContext.removeReleasedKey(mappedKey.keycode);
+          context.KeyboardContext.AddPressedKey(mappedKey.keycode);
+          context.KeyboardContext.RemoveHeldKey(mappedKey.keycode);
+          context.KeyboardContext.RemoveReleasedKey(mappedKey.keycode);
           break;
 
         case KeyAction.Held:
-          context.KeyboardContext.addHeldKey(mappedKey.keycode);
-          context.KeyboardContext.removePressedKey(mappedKey.keycode);
-          context.KeyboardContext.removeReleasedKey(mappedKey.keycode);
+          context.KeyboardContext.AddHeldKey(mappedKey.keycode);
+          context.KeyboardContext.RemovePressedKey(mappedKey.keycode);
+          context.KeyboardContext.RemoveReleasedKey(mappedKey.keycode);
           break;
 
         case KeyAction.Released:
-          context.KeyboardContext.addReleasedKey(mappedKey.keycode);
-          context.KeyboardContext.removePressedKey(mappedKey.keycode);
-          context.KeyboardContext.removeHeldKey(mappedKey.keycode);
+          context.KeyboardContext.AddReleasedKey(mappedKey.keycode);
+          context.KeyboardContext.RemovePressedKey(mappedKey.keycode);
+          context.KeyboardContext.RemoveHeldKey(mappedKey.keycode);
           break;
 
         default:
           break;
       }
 
-      groupedEventToCycle(mappedKey);
-      groupedEventToCycle(new Key(Keycode.K_AllKeys, mappedKey.action));
-      groupedEventToCycle(new Key(Keycode.AllEvents, mappedKey.action));
+      GroupedEventToCycle(mappedKey);
+      GroupedEventToCycle(new(Keycode.K_AllKeys, mappedKey.action));
+      GroupedEventToCycle(new(Keycode.AllEvents, mappedKey.action));
     }
 
-    public void onMousePress(string sdlWindow, uint button, SDL_EventType action, int mods) {
-      Key mappedButton = mapSdlMouseCode(button, action);
+    public void OnMousePress(string sdlWindow, uint button, SDL_EventType action, int mods) {
+      Key mappedButton = MapSdlMouseCode(button, action);
 
       switch (mappedButton.action) {
         case KeyAction.Pressed:
-          context.MouseContext.addPressedButton(mappedButton.keycode);
-          context.MouseContext.removeHeldButton(mappedButton.keycode);
-          context.MouseContext.removeReleasedButton(mappedButton.keycode);
+          context.MouseContext.AddPressedButton(mappedButton.keycode);
+          context.MouseContext.RemoveHeldButton(mappedButton.keycode);
+          context.MouseContext.RemoveReleasedButton(mappedButton.keycode);
           break;
 
         case KeyAction.Held:
-          context.MouseContext.addHeldButton(mappedButton.keycode);
-          context.MouseContext.removePressedButton(mappedButton.keycode);
-          context.MouseContext.removeReleasedButton(mappedButton.keycode);
+          context.MouseContext.AddHeldButton(mappedButton.keycode);
+          context.MouseContext.RemovePressedButton(mappedButton.keycode);
+          context.MouseContext.RemoveReleasedButton(mappedButton.keycode);
           break;
 
         case KeyAction.Released:
-          context.MouseContext.addReleasedButton(mappedButton.keycode);
-          context.MouseContext.removePressedButton(mappedButton.keycode);
-          context.MouseContext.removeHeldButton(mappedButton.keycode);
+          context.MouseContext.AddReleasedButton(mappedButton.keycode);
+          context.MouseContext.RemovePressedButton(mappedButton.keycode);
+          context.MouseContext.RemoveHeldButton(mappedButton.keycode);
           break;
 
         default:
           break;
       }
 
-      groupedEventToCycle(mappedButton);
-      groupedEventToCycle(new Key(Keycode.M_AllKeys, mappedButton.action));
-      groupedEventToCycle(new Key(Keycode.M_AllEvents, mappedButton.action));
-      groupedEventToCycle(new Key(Keycode.AllEvents, mappedButton.action));
+      GroupedEventToCycle(mappedButton);
+      GroupedEventToCycle(new(Keycode.M_AllKeys, mappedButton.action));
+      GroupedEventToCycle(new(Keycode.M_AllEvents, mappedButton.action));
+      GroupedEventToCycle(new(Keycode.AllEvents, mappedButton.action));
     }
 
-    public void onMouseMove(string sdlWindow, double x, double y) {
-      context.MouseContext.moveCursor(x, y);
+    public void OnMouseMove(string sdlWindow, double x, double y) {
+      context.MouseContext.MoveCursor(x, y);
 
-      groupedEventToCycle(new Key(Keycode.M_Move, KeyAction.Unknown));
-      groupedEventToCycle(new Key(Keycode.M_AllEvents, KeyAction.Unknown));
-      groupedEventToCycle(new Key(Keycode.AllEvents, KeyAction.Unknown));
+      GroupedEventToCycle(new(Keycode.M_Move, KeyAction.Unknown));
+      GroupedEventToCycle(new(Keycode.M_AllEvents, KeyAction.Unknown));
+      GroupedEventToCycle(new(Keycode.AllEvents, KeyAction.Unknown));
     }
 
     public void onScroll(string sdlWindow, double x, double y) {
       if (y > 0) {
-        groupedEventToCycle(new Key(Keycode.M_ScrollDown, KeyAction.Unknown));
+        GroupedEventToCycle(new(Keycode.M_ScrollDown, KeyAction.Unknown));
       }
 
       if (y < 0) {
-        groupedEventToCycle(new Key(Keycode.M_ScrollUp, KeyAction.Unknown));
+        GroupedEventToCycle(new(Keycode.M_ScrollUp, KeyAction.Unknown));
       }
 
-      context.MouseContext.moveScroll(x, y);
+      context.MouseContext.MoveScroll(x, y);
 
-      groupedEventToCycle(new Key(Keycode.M_Scroll, KeyAction.Unknown));
+      GroupedEventToCycle(new(Keycode.M_Scroll, KeyAction.Unknown));
 
-      groupedEventToCycle(new Key(Keycode.M_AllEvents, KeyAction.Unknown));
-      groupedEventToCycle(new Key(Keycode.AllEvents, KeyAction.Unknown));
+      GroupedEventToCycle(new(Keycode.M_AllEvents, KeyAction.Unknown));
+      GroupedEventToCycle(new(Keycode.AllEvents, KeyAction.Unknown));
 
-      context.MouseContext.moveScroll(0, 0);
+      context.MouseContext.MoveScroll(0, 0);
     }
 
     public void onCharPress(string sdlWindow, uint codepoint) {
-      context.KeyboardContext.setCodepoint(codepoint);
-      groupedEventToCycle(new Key(Keycode.K_AllChars, KeyAction.Unknown));
-      context.KeyboardContext.removeCodepoint();
+      context.KeyboardContext.SetCodepoint(codepoint);
+      GroupedEventToCycle(new(Keycode.K_AllChars, KeyAction.Unknown));
+      context.KeyboardContext.RemoveCodepoint();
     }
 
     //
 
-    void createTriggersFromFile(string path) {
+    void CreateTriggersFromFile(string path) {
       try {
         byte[] triggersData = File.ReadAllBytes(path);
         if (triggersData == null || triggersData.Length == 0) {
@@ -147,15 +149,15 @@ namespace Wind {
           Keys bindings = [];
 
           foreach (var bindingNode in (YamlSequenceNode)triggerNode["bindings"]) {
-            var key = mapStringToKeycode(bindingNode["key"].ToString());
-            var actionType = mapStringToKeyAction(bindingNode["action"].ToString());
+            var key = MapStringToKeycode(bindingNode["key"].ToString());
+            var actionType = MapStringToKeyAction(bindingNode["action"].ToString());
 
-            bindings.Add(new Key(key, actionType));
+            bindings.Add(new(key, actionType));
           }
 
           var name = triggerNode["name"].ToString();
 
-          addTrigger(name, bindings);
+          AddTrigger(name, bindings);
 
           Console.WriteLine($"Loaded action {name}");
         }
@@ -166,61 +168,61 @@ namespace Wind {
 
     //
 
-    void addTrigger(string groupName, Keys bindings, Callbacks callbacks) {
-      addGroupedTrigger(groupName, bindings, callbacks);
-      addKeycodeTrigger(bindings, callbacks);
+    void AddTrigger(string groupName, Keys bindings, Callbacks callbacks) {
+      AddGroupedTrigger(groupName, bindings, callbacks);
+      AddKeycodeTrigger(bindings, callbacks);
     }
 
-    void addTrigger(string groupName, Key binding, Callbacks callbacks) {
-      addTrigger(groupName, CreateKeys(binding), callbacks);
+    void AddTrigger(string groupName, Key binding, Callbacks callbacks) {
+      AddTrigger(groupName, CreateKeys(binding), callbacks);
     }
 
-    void addTrigger(string groupName, Key binding) {
-      addTrigger(groupName, CreateKeys(binding), new(delegate { }));
+    void AddTrigger(string groupName, Key binding) {
+      AddTrigger(groupName, CreateKeys(binding), new(delegate { }));
     }
 
-    void addTrigger(string groupName, Keys bindings) {
-      addTrigger(groupName, bindings, new(delegate { }));
+    void AddTrigger(string groupName, Keys bindings) {
+      AddTrigger(groupName, bindings, new(delegate { }));
     }
 
-    void addTrigger(string groupName) {
-      addGroupedTrigger(groupName, CreateKeys(), new(delegate { }));
-    }
-
-    //
-
-    void addTriggerBindings(string groupName, Keys bindings) {
-      addGroupedTriggerBindings(groupName, bindings);
-      addKeycodeTriggerBindings(groupName, bindings);
-    }
-
-    void addTriggerBindings(string groupName, Key binding) {
-      addGroupedTriggerBindings(groupName, binding);
-      addKeycodeTriggerBindings(groupName, binding);
+    void AddTrigger(string groupName) {
+      AddGroupedTrigger(groupName, CreateKeys(), new(delegate { }));
     }
 
     //
 
-    void addTriggerCallbacks(string groupName, Callbacks callbacks) {
-      addGroupedTriggerCallbacks(groupName, callbacks);
-      addKeycodeTriggerCallbacks(groupName, callbacks);
+    void AddTriggerBindings(string groupName, Keys bindings) {
+      AddGroupedTriggerBindings(groupName, bindings);
+      AddKeycodeTriggerBindings(groupName, bindings);
+    }
+
+    void AddTriggerBindings(string groupName, Key binding) {
+      AddGroupedTriggerBindings(groupName, binding);
+      AddKeycodeTriggerBindings(groupName, binding);
     }
 
     //
 
-    void removeTrigger(string groupName) {
+    void AddTriggerCallbacks(string groupName, Callbacks callbacks) {
+      AddGroupedTriggerCallbacks(groupName, callbacks);
+      AddKeycodeTriggerCallbacks(groupName, callbacks);
+    }
+
+    //
+
+    void RemoveTrigger(string groupName) {
       if (groupedTriggers.TryGetValue(groupName, out Trigger trigger)) {
         foreach (var binding in trigger.Bindings) {
-          removeKeycodeTrigger(binding, trigger.Callbacks);
+          RemoveKeycodeTrigger(binding, trigger.Callbacks);
         }
       }
 
       groupedTriggers.Remove(groupName);
     }
 
-    void removeTrigger(IEnumerable<string> groupNames) {
+    void RemoveTrigger(IEnumerable<string> groupNames) {
       foreach (var groupName in groupNames) {
-        removeTrigger(groupName);
+        RemoveTrigger(groupName);
       }
     }
   };

@@ -1,6 +1,5 @@
 namespace Wind {
   public partial class InputSystem {
-
     public enum Keycode {
       Unknown = 0,
       K_Return = 13,

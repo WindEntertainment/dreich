@@ -4,32 +4,32 @@ using static SDL2.SDL;
 
 namespace Wind {
   public partial class InputSystem {
-    public KeyAction mapStringToKeyAction(string value) {
+    private KeyAction MapStringToKeyAction(string value) {
       return Utils.EnumExtensions.ParseOrDefault(value, KeyAction.Unknown);
     }
 
-    Keycode mapStringToKeycode(string value) {
+    private Keycode MapStringToKeycode(string value) {
       return Utils.EnumExtensions.ParseOrDefault(value, Keycode.Unknown);
     }
 
-    Dictionary<SDL_EventType, KeyAction> sdlActionToKeyAction = new() {
+    private Dictionary<SDL_EventType, KeyAction> sdlActionToKeyAction = new() {
       [SDL_EventType.SDL_KEYUP] = KeyAction.Released,
       [SDL_EventType.SDL_KEYDOWN] = KeyAction.Pressed,
     };
 
-    KeyAction mapSdlAction(SDL_EventType eventType) {
+    private KeyAction MapSdlAction(SDL_EventType eventType) {
       return sdlActionToKeyAction.TryGetValue(eventType, out KeyAction keyAction) ? keyAction : KeyAction.Unknown;
     }
 
-    Dictionary<uint, Keycode> sdlMouseCodeToKeycode = new() {
+    private Dictionary<uint, Keycode> sdlMouseCodeToKeycode = new() {
       [SDL_BUTTON_LEFT] = Keycode.M_ButtonLeft,
       [SDL_BUTTON_MIDDLE] = Keycode.M_ButtonMiddle,
       [SDL_BUTTON_RIGHT] = Keycode.M_ButtonRight,
     };
 
-    Key mapSdlMouseCode(uint key, SDL_EventType action) {
+    private Key MapSdlMouseCode(uint key, SDL_EventType action) {
       Keycode mouseKeycode = sdlMouseCodeToKeycode.TryGetValue(key, out Keycode keyAction) ? keyAction : Keycode.Unknown;
-      return new(mouseKeycode, mapSdlAction(action));
+      return new(mouseKeycode, MapSdlAction(action));
     }
 
     // Key mapGlfwJoystickCodeToKey(int glfwKey, int action)
@@ -133,7 +133,7 @@ namespace Wind {
     //   }
     // }
 
-    Dictionary<SDL_Keycode, Keycode> sdlKeyToKeycode = new() {
+    private Dictionary<SDL_Keycode, Keycode> sdlKeyToKeycode = new() {
       [SDL_Keycode.SDLK_UNKNOWN] = Keycode.Unknown,
       [SDL_Keycode.SDLK_RETURN] = Keycode.K_Return,
       [SDL_Keycode.SDLK_ESCAPE] = Keycode.K_Escape,
@@ -372,9 +372,9 @@ namespace Wind {
       [SDL_Keycode.SDLK_SLEEP] = Keycode.K_Sleep,
     };
 
-    Key mapSdlKeyCode(SDL_Keycode glfwKey, SDL_EventType action) {
+    private Key MapSdlKeyCode(SDL_Keycode glfwKey, SDL_EventType action) {
       Keycode keycode = sdlKeyToKeycode.TryGetValue(glfwKey, out Keycode key) ? key : Keycode.Unknown;
-      return new(keycode, mapSdlAction(action));
+      return new(keycode, MapSdlAction(action));
     }
   };
 }

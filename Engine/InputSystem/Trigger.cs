@@ -3,7 +3,6 @@ global using Callbacks = System.Action<Wind.InputSystem.InputSystemContext>;
 
 namespace Wind {
   public partial class InputSystem {
-
     public static Keys CreateKeys(params Key[] initialValues) => new(initialValues, new KeyEqualityComparer());
 
     public struct Trigger(string name, Keys bindings, Callbacks callbacks) {
