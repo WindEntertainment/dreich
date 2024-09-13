@@ -1,22 +1,20 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <OutputType>library</OutputType>
+    <OutputType>exe</OutputType>
     <TargetFramework>net8.0</TargetFramework>
-    <RootNamespace>wind</RootNamespace>
+    <RootNamespace>game</RootNamespace>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="OpenGL.Net" Version="0.8.4" />
-    <PackageReference Include="SDL2-CS.NetCore" Version="2.0.8" />
-    <PackageReference Include="YamlDotNet" Version="16.1.0" />
+    <ProjectReference Include="..\Engine\wind.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Include="Engine\**\*.cs" />
+    <Compile Include="Src\**\*.cs" />
   </ItemGroup>
 
 </Project>

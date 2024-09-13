@@ -1,8 +1,6 @@
-using System;
-using System.IO;
 using YamlDotNet.RepresentationModel;
 using YamlDotNet.Serialization;
-using YamlDotNet.Serialization.NamingConventions;
+
 using static SDL2.SDL;
 
 namespace Wind {
