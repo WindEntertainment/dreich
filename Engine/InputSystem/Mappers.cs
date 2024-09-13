@@ -12,7 +12,7 @@ namespace Wind {
       return EnumExtensions.ParseOrDefault(value, Keycode.Unknown);
     }
 
-    Dictionary<SDL_EventType, KeyAction> sdlActionToKeyAction = new Dictionary<SDL_EventType, KeyAction>() {
+    Dictionary<SDL_EventType, KeyAction> sdlActionToKeyAction = new() {
       [SDL_EventType.SDL_KEYUP] = KeyAction.Released,
       [SDL_EventType.SDL_KEYDOWN] = KeyAction.Pressed,
     };
@@ -21,7 +21,7 @@ namespace Wind {
       return sdlActionToKeyAction.TryGetValue(eventType, out KeyAction keyAction) ? keyAction : KeyAction.Unknown;
     }
 
-    Dictionary<uint, Keycode> sdlMouseCodeToKeycode = new Dictionary<uint, Keycode>() {
+    Dictionary<uint, Keycode> sdlMouseCodeToKeycode = new() {
       [SDL_BUTTON_LEFT] = Keycode.MOUSE_BUTTON_LEFT,
       [SDL_BUTTON_MIDDLE] = Keycode.MOUSE_BUTTON_MIDDLE,
       [SDL_BUTTON_RIGHT] = Keycode.MOUSE_BUTTON_RIGHT,
@@ -29,7 +29,7 @@ namespace Wind {
 
     Key mapGlfwMouseCodeToKey(uint key, SDL_EventType action) {
       Keycode mouseKeycode = sdlMouseCodeToKeycode.TryGetValue(key, out Keycode keyAction) ? keyAction : Keycode.Unknown;
-      return new Key(mouseKeycode, mapGlfwActionToKeyAction(action));
+      return new(mouseKeycode, mapGlfwActionToKeyAction(action));
     }
 
     // Key mapGlfwJoystickCodeToKey(int glfwKey, int action)
@@ -133,7 +133,7 @@ namespace Wind {
     //   }
     // }
 
-    Dictionary<SDL_Keycode, Keycode> sdlKeyToKeycode = new Dictionary<SDL_Keycode, Keycode>() {
+    Dictionary<SDL_Keycode, Keycode> sdlKeyToKeycode = new() {
       [SDL_Keycode.SDLK_UNKNOWN] = Keycode.Unknown,
       [SDL_Keycode.SDLK_RETURN] = Keycode.K_Return,
       [SDL_Keycode.SDLK_ESCAPE] = Keycode.K_Escape,
@@ -374,7 +374,7 @@ namespace Wind {
 
     Key mapGlfwKeyboardCodeToKey(SDL_Keycode glfwKey, SDL_EventType action) {
       Keycode keycode = sdlKeyToKeycode.TryGetValue(glfwKey, out Keycode key) ? key : Keycode.Unknown;
-      return new Key(keycode, mapGlfwActionToKeyAction(action));
+      return new(keycode, mapGlfwActionToKeyAction(action));
     }
   };
 }
