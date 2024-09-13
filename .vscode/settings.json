@@ -12,5 +12,6 @@
     "OPENGL",
     "scancode",
     "WINDOWPOS"
-  ]
+  ],
+  "cmake.sourceDirectory": "/home/neutrinozh/Dev/charp-test/Renderer"
 }

@@ -10,7 +10,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Engine\wind.csproj" />
+    <!-- <ProjectReference Include="..\Engine\wind.csproj" /> -->
   </ItemGroup>
 
   <ItemGroup>
