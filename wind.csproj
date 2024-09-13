@@ -12,6 +12,7 @@
   <ItemGroup>
     <PackageReference Include="OpenGL.Net" Version="0.8.4" />
     <PackageReference Include="SDL2-CS.NetCore" Version="2.0.8" />
+    <PackageReference Include="YamlDotNet" Version="16.1.0" />
   </ItemGroup>
 
   <ItemGroup>

@@ -238,10 +238,21 @@ namespace Wind {
       K_KbdillumuUp = 1073742104,
       K_Eject = 1073742105,
       K_Sleep = 1073742106,
-
-      MOUSE_BUTTON_LEFT,
-      MOUSE_BUTTON_RIGHT,
-      MOUSE_BUTTON_MIDDLE
+      //
+      M_ButtonLeft,
+      M_ButtonRight,
+      M_ButtonMiddle,
+      //
+      M_Move,
+      M_ScrollDown,
+      M_ScrollUp,
+      M_Scroll,
+      //
+      K_AllKeys,
+      K_AllChars,
+      M_AllKeys,
+      M_AllEvents,
+      AllEvents,
     };
   };
 }

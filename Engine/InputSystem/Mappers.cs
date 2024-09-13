@@ -17,19 +17,19 @@ namespace Wind {
       [SDL_EventType.SDL_KEYDOWN] = KeyAction.Pressed,
     };
 
-    KeyAction mapGlfwActionToKeyAction(SDL_EventType eventType) {
+    KeyAction mapSdlAction(SDL_EventType eventType) {
       return sdlActionToKeyAction.TryGetValue(eventType, out KeyAction keyAction) ? keyAction : KeyAction.Unknown;
     }
 
     Dictionary<uint, Keycode> sdlMouseCodeToKeycode = new() {
-      [SDL_BUTTON_LEFT] = Keycode.MOUSE_BUTTON_LEFT,
-      [SDL_BUTTON_MIDDLE] = Keycode.MOUSE_BUTTON_MIDDLE,
-      [SDL_BUTTON_RIGHT] = Keycode.MOUSE_BUTTON_RIGHT,
+      [SDL_BUTTON_LEFT] = Keycode.M_ButtonLeft,
+      [SDL_BUTTON_MIDDLE] = Keycode.M_ButtonMiddle,
+      [SDL_BUTTON_RIGHT] = Keycode.M_ButtonRight,
     };
 
-    Key mapGlfwMouseCodeToKey(uint key, SDL_EventType action) {
+    Key mapSdlMouseCode(uint key, SDL_EventType action) {
       Keycode mouseKeycode = sdlMouseCodeToKeycode.TryGetValue(key, out Keycode keyAction) ? keyAction : Keycode.Unknown;
-      return new(mouseKeycode, mapGlfwActionToKeyAction(action));
+      return new(mouseKeycode, mapSdlAction(action));
     }
 
     // Key mapGlfwJoystickCodeToKey(int glfwKey, int action)
@@ -372,9 +372,9 @@ namespace Wind {
       [SDL_Keycode.SDLK_SLEEP] = Keycode.K_Sleep,
     };
 
-    Key mapGlfwKeyboardCodeToKey(SDL_Keycode glfwKey, SDL_EventType action) {
+    Key mapSdlKeyCode(SDL_Keycode glfwKey, SDL_EventType action) {
       Keycode keycode = sdlKeyToKeycode.TryGetValue(glfwKey, out Keycode key) ? key : Keycode.Unknown;
-      return new(keycode, mapGlfwActionToKeyAction(action));
+      return new(keycode, mapSdlAction(action));
     }
   };
 }

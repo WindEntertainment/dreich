@@ -6,8 +6,8 @@ namespace Wind {
   public partial class InputSystem {
 
     public struct Key(Keycode keycode = Keycode.Unknown, KeyAction action = KeyAction.Unknown) {
-      Keycode keycode = keycode;
-      KeyAction action = action;
+      public Keycode keycode = keycode;
+      public KeyAction action = action;
 
       public readonly bool Equals(Key key) {
         return key.keycode == keycode && action == key.action;

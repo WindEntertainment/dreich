@@ -10,6 +10,7 @@
     "KEYUP",
     "Mathf",
     "OPENGL",
+    "scancode",
     "WINDOWPOS"
   ]
 }

@@ -72,7 +72,7 @@ namespace Wind {
     }
 
     public void removeKeycodeTrigger(Key binding, Callbacks callbacks) {
-      keycodeTriggers.TryGetValue(binding, out Callbacks existingCallbacks);
+      keycodeTriggers.TryGetValue(binding, out Callbacks? existingCallbacks);
       if (existingCallbacks == null) return;
 
       foreach (var callback in callbacks.GetInvocationList()) {
