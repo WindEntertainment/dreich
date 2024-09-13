@@ -5,11 +5,11 @@ using static SDL2.SDL;
 namespace Wind {
   public partial class InputSystem {
     public KeyAction mapStringToKeyAction(string value) {
-      return EnumExtensions.ParseOrDefault(value, KeyAction.Unknown);
+      return Utils.EnumExtensions.ParseOrDefault(value, KeyAction.Unknown);
     }
 
     Keycode mapStringToKeycode(string value) {
-      return EnumExtensions.ParseOrDefault(value, Keycode.Unknown);
+      return Utils.EnumExtensions.ParseOrDefault(value, Keycode.Unknown);
     }
 
     Dictionary<SDL_EventType, KeyAction> sdlActionToKeyAction = new() {

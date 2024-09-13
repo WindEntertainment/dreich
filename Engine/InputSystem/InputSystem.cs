@@ -12,7 +12,7 @@ namespace Wind {
 
     void groupedEventToCycle(Key keycode) {
       if (!keycodeTriggers.TryGetValue(keycode, out Callbacks? action)) return;
-      action.Invoke(context);
+      action?.Invoke(context);
     }
 
     public void onKeyPress(string sdlWindow, SDL_Keycode key, int scancode, SDL_EventType action, int mods) {
@@ -221,13 +221,6 @@ namespace Wind {
     void removeTrigger(IEnumerable<string> groupNames) {
       foreach (var groupName in groupNames) {
         removeTrigger(groupName);
-      }
-    }
-
-    class EnumExtensions {
-      public static TEnum ParseOrDefault<TEnum>(ReadOnlySpan<char> value, TEnum defaultValue) where TEnum : struct {
-        if (Enum.TryParse(value, out TEnum action)) return action;
-        return defaultValue;
       }
     }
   };
