@@ -3,10 +3,6 @@ description: Test renderer
 
 runs:
   using: 'composite'
-  steps:
-    - name: Setup conan base
-      uses: ./.github/workflows/utils/setup-conan
-
     - name: Prepare renderer env
       uses: ./.github/workflows/modules/renderer/setup-env
 

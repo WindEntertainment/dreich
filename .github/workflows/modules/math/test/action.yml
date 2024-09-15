@@ -4,13 +4,6 @@ description: Test math
 runs:
   using: 'composite'
   steps:
-    - name: Setup conan base
-      shell: bash
-      run: |
-        echo 1
-    - name: Setup conan base
-      uses: ./.github/workflows/utils/setup-conan
-
     - name: Prepare math env
       uses: ./.github/workflows/modules/math/setup-env
 
