@@ -49,4 +49,8 @@ runs:
         echo "$(pwd)" >> $GITHUB_PATH
 
     - name: Install dependencies
-      uses: ./.github/workflows/modules/engine/install-dependencies
+      shell: bash
+      run: |
+        export CC=${{ env.cc }}
+        export CXX=${{ env.cxx }}
+        wm run conan-install -bt ${{ env.engineBuildType }}
