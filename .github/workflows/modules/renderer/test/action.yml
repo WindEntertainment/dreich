@@ -3,6 +3,7 @@ description: Test renderer
 
 runs:
   using: 'composite'
+  steps:
     - name: Prepare renderer env
       uses: ./.github/workflows/modules/renderer/setup-env
 
