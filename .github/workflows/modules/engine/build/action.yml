@@ -2,16 +2,10 @@ name: Build engine
 description: Build engine
 
 runs:
-  using: "composite"
+  using: 'composite'
   steps:
-    - name: Setup conan base
-      uses: ./.github/workflows/utils/setup-conan
-
     - name: Prepare engine env
       uses: ./.github/workflows/modules/engine/setup-env
-
-    - name: Install dependencies
-      uses: ./.github/workflows/modules/engine/install-dependencies
 
     - name: Build wind-core with wm
       shell: bash

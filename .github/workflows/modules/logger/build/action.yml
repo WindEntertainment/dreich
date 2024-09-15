@@ -4,14 +4,8 @@ description: Build logger
 runs:
   using: 'composite'
   steps:
-    - name: Setup conan base
-      uses: ./.github/workflows/utils/setup-conan
-
     - name: Prepare logger env
       uses: ./.github/workflows/modules/logger/setup-env
-
-    - name: Install dependencies
-      uses: ./.github/workflows/modules/logger/install-dependencies
 
     - name: Build logger with wm
       shell: bash

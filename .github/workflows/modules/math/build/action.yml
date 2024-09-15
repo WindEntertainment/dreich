@@ -4,14 +4,8 @@ description: Build math
 runs:
   using: 'composite'
   steps:
-    - name: Setup conan base
-      uses: ./.github/workflows/utils/setup-conan
-
     - name: Prepare math env
       uses: ./.github/workflows/modules/math/setup-env
-
-    - name: Install dependencies
-      uses: ./.github/workflows/modules/math/install-dependencies
 
     - name: Build math with wm
       shell: bash

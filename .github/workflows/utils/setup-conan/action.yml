@@ -2,7 +2,7 @@ name: Setup conan
 description: Setup conan
 
 runs:
-  using: "composite"
+  using: 'composite'
   steps:
     - name: Install conan
       if: env.os != 'macos-14'
@@ -68,3 +68,10 @@ runs:
 
     - name: Setup conan cache
       uses: ./.github/workflows/utils/cache/get-conan-cache
+
+    - name: Install dependencies
+      shell: bash
+      run: |
+        export CC=${{ env.cc }}
+        export CXX=${{ env.cxx }}
+        wm run conan-install -bt ${{ env.engineBuildType }}
