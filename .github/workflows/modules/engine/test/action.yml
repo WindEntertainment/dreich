@@ -7,9 +7,6 @@ runs:
     - name: Prepare engine env
       uses: ./.github/workflows/modules/engine/setup-env
 
-    - name: Install dependencies
-      uses: ./.github/workflows/modules/engine/install-dependencies
-
     - name: Build game with wm
       shell: bash
       run: |

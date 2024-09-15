@@ -7,9 +7,6 @@ runs:
     - name: Prepare logger env
       uses: ./.github/workflows/modules/logger/setup-env
 
-    - name: Install dependencies
-      uses: ./.github/workflows/modules/logger/install-dependencies
-
     - name: Build game with wm
       shell: bash
       run: |

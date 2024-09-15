@@ -6,9 +6,6 @@ runs:
     - name: Prepare renderer env
       uses: ./.github/workflows/modules/renderer/setup-env
 
-    - name: Install dependencies
-      uses: ./.github/workflows/modules/renderer/install-dependencies
-
     - name: Build renderer tests with wm
       shell: bash
       run: |

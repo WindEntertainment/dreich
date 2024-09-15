@@ -7,9 +7,6 @@ runs:
     - name: Prepare math env
       uses: ./.github/workflows/modules/math/setup-env
 
-    - name: Install dependencies
-      uses: ./.github/workflows/modules/math/install-dependencies
-
     - name: Build game with wm
       shell: bash
       run: |
