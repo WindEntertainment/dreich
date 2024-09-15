@@ -31,3 +31,4 @@ endif()
 
 add_subdirectory(./Math/Native/)
 add_subdirectory(./Renderer/Native)
+add_subdirectory(./Logger/Native)
