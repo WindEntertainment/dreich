@@ -48,9 +48,5 @@ runs:
         ./config.sh
         echo "$(pwd)" >> $GITHUB_PATH
 
-    - name: Install dependencies
-      shell: bash
-      run: |
-        export CC=${{ env.cc }}
-        export CXX=${{ env.cxx }}
-        wm run conan-install -bt ${{ env.engineBuildType }}
+    - name: Setup conan base
+      uses: ./.github/workflows/utils/setup-conan
