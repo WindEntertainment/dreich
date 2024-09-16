@@ -11,7 +11,7 @@ class MyConanFile(ConanFile):
   exports_sources = "*"
   requires = [
     "boost/1.85.0",
-    "sdl/2.30.7"
+    # "sdl/2.30.7"
   ]
 
   options = {
