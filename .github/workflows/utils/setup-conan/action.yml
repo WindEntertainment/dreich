@@ -44,6 +44,9 @@ runs:
             [conf]
             tools.system.package_manager:mode=install
             tools.cmake.cmaketoolchain:generator=Unix Makefiles
+            [buildenv]
+            CC=clang-cl.exe
+            CXX=clang-cl.exe
           " > C:\\Users\\runneradmin\\.conan2\\profiles\\default
         elif [ "$RUNNER_OS" == "macOS" ]; then
           echo "
