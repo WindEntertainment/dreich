@@ -155,3 +155,10 @@ jobs:
         uses: './.github/workflows/modules/renderer/build'
       - name: Engine
         uses: './.github/workflows/modules/engine/build'
+      - name: Upload package as release
+        shell: bash
+        run: |
+          git config user.name "GitHub Actions"
+          git config user.email "actions@github.com"
+          gh release delete $sha --yes || echo "No existing release to delete"
+          gh release create $sha --title "Release $sha" --generate-notes --latest $(pwd)/releases/wind-cpp.zip
