@@ -22,8 +22,9 @@ cd "$root" || exit
 if [[ $with_dependencies = true ]]; then
   rm -rf build
   wm run conan-install -bt Debug
-  wm run cmake-configure --build-type Debug --with-testing
 fi
+
+wm run cmake-configure --build-type Debug --with-testing
 
 cd "$root/build/Debug/tests" || exit
 

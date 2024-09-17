@@ -2,7 +2,7 @@ name: Setup conan
 description: Setup conan
 
 runs:
-  using: "composite"
+  using: 'composite'
   steps:
     - name: Install conan
       if: env.os != 'macos-14'
@@ -21,7 +21,7 @@ runs:
           echo "
             [settings]
             arch=x86_64
-            build_type=${{ env.engineBuildType }}
+            build_type=${{ env.conanBuildType }}
             compiler=clang
             compiler.cppstd=20
             compiler.libcxx=libc++
@@ -36,7 +36,7 @@ runs:
           echo "
             [settings]
             arch=x86_64
-            build_type=${{ env.engineBuildType }}
+            build_type=${{ env.conanBuildType }}
             compiler=clang
             compiler.cppstd=gnu23
             compiler.version=17
@@ -44,12 +44,15 @@ runs:
             [conf]
             tools.system.package_manager:mode=install
             tools.cmake.cmaketoolchain:generator=Unix Makefiles
+            [buildenv]
+            CC=clang-cl.exe
+            CXX=clang-cl.exe
           " > C:\\Users\\runneradmin\\.conan2\\profiles\\default
         elif [ "$RUNNER_OS" == "macOS" ]; then
           echo "
             [settings]
             arch=armv8
-            build_type=${{ env.engineBuildType }}
+            build_type=${{ env.conanBuildType }}
             compiler=apple-clang
             compiler.cppstd=gnu23
             compiler.libcxx=libc++
@@ -68,3 +71,10 @@ runs:
 
     - name: Setup conan cache
       uses: ./.github/workflows/utils/cache/get-conan-cache
+
+    - name: Install dependencies
+      shell: bash
+      run: |
+        export CC=${{ env.cc }}
+        export CXX=${{ env.cxx }}
+        wm run conan-install -bt ${{ env.conanBuildType }}

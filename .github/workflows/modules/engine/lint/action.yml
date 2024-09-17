@@ -5,10 +5,5 @@ runs:
   using: 'composite'
   steps:
     - name: Lint
-      uses: DoozyX/clang-format-lint-action@v0.17
-      with:
-        source: '.'
-        exclude: './game/data'
-        extensions: 'h,cpp'
-        clangFormatVersion: 17
-        inplace: true
+      shell: bash
+      run: dotnet format
