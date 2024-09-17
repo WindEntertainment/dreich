@@ -26,7 +26,7 @@ jobs:
           - {
               name: 'Ubuntu',
               projectRoot: '/home/runner/work/dreich',
-              artifact: 'dreich-linux-${{ github.event.pull_request.title }}',
+              artifact: 'linux-${{ github.event.pull_request.title }}',
               os: 'ubuntu-latest',
               dotnetBuildType: 'build',
               conanBuildType: 'Debug',
@@ -65,7 +65,7 @@ jobs:
           - {
               name: 'MacOS',
               projectRoot: '/Users/runner/work/dreich',
-              artifact: 'dreich-macos-${{ github.event.pull_request.title }}',
+              artifact: 'macos-${{ github.event.pull_request.title }}',
               os: 'macos-14',
               dotnetBuildType: 'build',
               conanBuildType: 'Debug',
@@ -106,7 +106,7 @@ jobs:
           - {
               name: 'Windows',
               projectRoot: 'D:/a/dreich',
-              artifact: 'dreich-windows-${{ github.event.pull_request.title }}',
+              artifact: 'windows-${{ github.event.pull_request.title }}',
               os: 'windows-latest',
               dotnetBuildType: 'publish',
               conanBuildType: 'Release',
@@ -117,7 +117,7 @@ jobs:
           - {
               name: 'Ubuntu',
               projectRoot: '/home/runner/work/dreich',
-              artifact: 'dreich-linux-${{ github.event.pull_request.title }}',
+              artifact: 'linux-${{ github.event.pull_request.title }}',
               os: 'ubuntu-latest',
               dotnetBuildType: 'publish',
               conanBuildType: 'Release',
@@ -128,7 +128,7 @@ jobs:
           - {
               name: 'MacOS',
               projectRoot: '/Users/runner/work/dreich',
-              artifact: 'dreich-macos-${{ github.event.pull_request.title }}',
+              artifact: 'macos-${{ github.event.pull_request.title }}',
               os: 'macos-14',
               dotnetBuildType: 'publish',
               conanBuildType: 'Release',
@@ -166,4 +166,4 @@ jobs:
           git config user.name "GitHub Actions"
           git config user.email "actions@github.com"
           gh release delete $sha --yes || echo "No existing release to delete"
-          gh release create $sha --title "Release $sha" --generate-notes --latest $(pwd)/releases/wind.zip
+          gh release create $sha --title "Release $artifact" --generate-notes --latest $(pwd)/releases/wind.zip
