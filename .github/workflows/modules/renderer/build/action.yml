@@ -14,4 +14,3 @@ runs:
         export CXX=${{ env.cxx }}
 
         wm run cmake-build -t renderer -bt ${{ env.conanBuildType }}
-        wm run cpack-build -bt ${{ env.conanBuildType }}

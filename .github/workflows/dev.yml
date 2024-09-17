@@ -152,6 +152,10 @@ jobs:
         uses: './.github/workflows/modules/renderer/build'
       - name: Engine
         uses: './.github/workflows/modules/engine/build'
+      - name: Cpack build
+        shell: bash
+        run: |
+          wm run cpack-build -bt ${{ env.conanBuildType }}
       - name: Upload package as artifact
         uses: actions/upload-artifact@v4
         with:
