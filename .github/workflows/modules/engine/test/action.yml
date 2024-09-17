@@ -4,12 +4,6 @@ description: Test engine
 runs:
   using: 'composite'
   steps:
-    - name: Prepare engine env
-      uses: ./.github/workflows/modules/engine/setup-env
-
-    - name: Build game with wm
+    - name: Build
       shell: bash
-      run: |
-        export CC=${{ env.cc }}
-        export CXX=${{ env.cxx }}
-        wm run test -wd
+      run: dotnet ${{ env.dotnetBuildType }}

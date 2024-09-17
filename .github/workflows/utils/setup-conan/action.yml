@@ -21,7 +21,7 @@ runs:
           echo "
             [settings]
             arch=x86_64
-            build_type=${{ env.engineBuildType }}
+            build_type=${{ env.conanBuildType }}
             compiler=clang
             compiler.cppstd=20
             compiler.libcxx=libc++
@@ -36,7 +36,7 @@ runs:
           echo "
             [settings]
             arch=x86_64
-            build_type=${{ env.engineBuildType }}
+            build_type=${{ env.conanBuildType }}
             compiler=clang
             compiler.cppstd=gnu23
             compiler.version=17
@@ -52,7 +52,7 @@ runs:
           echo "
             [settings]
             arch=armv8
-            build_type=${{ env.engineBuildType }}
+            build_type=${{ env.conanBuildType }}
             compiler=apple-clang
             compiler.cppstd=gnu23
             compiler.libcxx=libc++
@@ -77,4 +77,4 @@ runs:
       run: |
         export CC=${{ env.cc }}
         export CXX=${{ env.cxx }}
-        wm run conan-install -bt ${{ env.engineBuildType }}
+        wm run conan-install -bt ${{ env.conanBuildType }}

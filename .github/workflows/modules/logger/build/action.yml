@@ -13,8 +13,8 @@ runs:
         export CC=${{ env.cc }}
         export CXX=${{ env.cxx }}
 
-        wm run cmake-build -t logger -bt ${{ env.engineBuildType }}
-        wm run cpack-build -bt ${{ env.engineBuildType }}
+        wm run cmake-build -t logger -bt ${{ env.conanBuildType }}
+        wm run cpack-build -bt ${{ env.conanBuildType }}
 
     # - name: Upload package as artifact
     #   # wrong if condition
