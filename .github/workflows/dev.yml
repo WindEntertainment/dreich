@@ -89,7 +89,7 @@ jobs:
         run: |
           export CC=${{ env.cc }}
           export CXX=${{ env.cxx }}
-          wm run test -wd
+          wm run test
       - name: Engine
         uses: './.github/workflows/modules/engine/test'
 
