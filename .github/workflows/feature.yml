@@ -86,12 +86,12 @@ jobs:
         with:
           json: ${{ toJSON(matrix.config) }}
       - uses: ./.github/workflows/utils/setup-base-libs
-      - name: Logger
-        uses: './.github/workflows/modules/logger/test'
-      - name: Math
-        uses: './.github/workflows/modules/math/test'
-      - name: Renderer
-        uses: './.github/workflows/modules/renderer/test'
+      - name: Ctest
+        shell: bash
+        run: |
+          export CC=${{ env.cc }}
+          export CXX=${{ env.cxx }}
+          wm run test
       - name: Engine
         uses: './.github/workflows/modules/engine/test'
 
