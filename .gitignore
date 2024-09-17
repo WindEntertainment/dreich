@@ -10,6 +10,7 @@ CMakeUserPresets.json
 *.zip
 *-autosave.kra
 *.dll
+conan-deploy
 
 [Bb]in/
 [Oo]bj/

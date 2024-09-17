@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.22)
 
-project(wind-cpp)
+project(wind)
 
 message("Building with CMake version: ${CMAKE_VERSION}")
 
@@ -38,5 +38,12 @@ add_subdirectory(./Logger/Native)
 
 add_library(${PROJECT_NAME} SHARED empty.cpp)
 target_link_libraries(${PROJECT_NAME} ${MATH_LIB} ${RENDERER_LIB} ${LOGGER_LIB})
+
+add_custom_command(TARGET ${PROJECT_NAME}
+  POST_BUILD
+  COMMAND dotnet publish
+  WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
+  COMMENT "Running dotnet publish"
+)
 
 include(cpack/cpack.cmake)
