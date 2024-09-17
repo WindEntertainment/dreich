@@ -52,8 +52,8 @@ jobs:
         uses: './.github/workflows/modules/math/lint'
       - name: Renderer
         uses: './.github/workflows/modules/renderer/lint'
-      # - name: Engine
-      #   uses: './.github/workflows/modules/engine/lint'
+      - name: Engine
+        uses: './.github/workflows/modules/engine/lint'
       - name: Linting commit
         uses: './.github/workflows/utils/commit'
 
@@ -92,8 +92,8 @@ jobs:
         uses: './.github/workflows/modules/math/test'
       - name: Renderer
         uses: './.github/workflows/modules/renderer/test'
-      # - name: Engine
-      #   uses: './.github/workflows/modules/engine/test'
+      - name: Engine
+        uses: './.github/workflows/modules/engine/test'
 
   building:
     name: 'Build: ${{ matrix.config.name }}'
@@ -152,5 +152,5 @@ jobs:
         uses: './.github/workflows/modules/math/build'
       - name: Renderer
         uses: './.github/workflows/modules/renderer/build'
-      # - name: Engine
-      #   uses: './.github/workflows/modules/engine/build'
+      - name: Engine
+        uses: './.github/workflows/modules/engine/build'
