@@ -4,6 +4,5 @@ description: Lint engine
 runs:
   using: 'composite'
   steps:
-    - name: Build
-      shell: bash
-      run: dotnet ${{ env.dotnetBuildType }}
+    - name: Lint
+      run: dotnet format

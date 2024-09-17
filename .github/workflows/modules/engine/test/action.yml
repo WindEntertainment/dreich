@@ -4,6 +4,9 @@ description: Test engine
 runs:
   using: 'composite'
   steps:
-    - name: Build
+    - name: Prepare engine env
+      uses: ./.github/workflows/modules/engine/setup-env
+
+    - name: Test
       shell: bash
-      run: dotnet ${{ env.dotnetBuildType }}
+      run: dotnet test
