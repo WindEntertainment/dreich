@@ -8,6 +8,10 @@ set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
+set(MATH_LIB math)
+set(RENDERER_LIB renderer)
+set(LOGGER_LIB logger)
+
 add_compile_options(-fms-extensions)
 
 if(ENABLE_TESTS AND CMAKE_BUILD_TYPE STREQUAL "Debug")
@@ -19,7 +23,6 @@ if(ENABLE_TESTS AND CMAKE_BUILD_TYPE STREQUAL "Debug")
   add_custom_target(coverage
     COMMAND ${CMAKE_COMMAND} -E remove_directory ${CMAKE_SOURCE_DIR}/tests/coverage
     COMMAND mkdir ${CMAKE_SOURCE_DIR}/tests/coverage
-    # COMMAND game-tests
     COMMAND tests
     COMMAND gcovr --root ${CMAKE_SOURCE_DIR} --exclude '.*/tests/.*' --exclude '.*/CMakeFiles/.*' --exclude '.*/build/.*' --html --html-details -o ${CMAKE_SOURCE_DIR}/tests/coverage/index.html
     WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
@@ -32,5 +35,8 @@ endif()
 add_subdirectory(./Math/Native/)
 add_subdirectory(./Renderer/Native)
 add_subdirectory(./Logger/Native)
+
+add_library(${PROJECT_NAME} SHARED empty.cpp)
+target_link_libraries(${PROJECT_NAME} ${MATH_LIB} ${RENDERER_LIB} ${LOGGER_LIB})
 
 include(cpack/cpack.cmake)

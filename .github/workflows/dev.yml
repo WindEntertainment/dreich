@@ -152,3 +152,10 @@ jobs:
         uses: './.github/workflows/modules/renderer/build'
       - name: Engine
         uses: './.github/workflows/modules/engine/build'
+      - name: Upload package as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ env.artifact }}
+          path: ${{ env.projectRoot }}/dreich/releases/wind-cpp.zip
+          retention-days: 1
+          overwrite: true

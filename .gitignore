@@ -16,6 +16,7 @@ CMakeUserPresets.json
 [Bb]uild/
 [Tt]emp/
 [Ll]ogs/
+[Rr]eleases/
 
 !/.github/**
 !/.vscode/**
