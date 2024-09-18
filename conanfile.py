@@ -2,7 +2,6 @@ import os
 
 from conan import ConanFile
 from conan.tools.cmake import CMakeToolchain, CMake, cmake_layout, CMakeDeps
-from conan.tools.files import copy
 
 class MyConanFile(ConanFile):
   name = "dreich"
@@ -55,7 +54,6 @@ class MyConanFile(ConanFile):
   }
 
   default_options = {
-    "*:shared": True,
     "boost/*:header_only": False,
     "boost/*:without_charconv": False,
     "boost/*:without_container": False,
@@ -102,9 +100,5 @@ class MyConanFile(ConanFile):
     cmake.configure()
     cmake.build()
 
-  # def package_info(self):
-  #   super().package_info()
-  #   self.cpp_info.libs = ["Dreich"]
-
-  def deploy(self):
-    copy(self, "*", src=self.package_folder, dst=self.deploy_folder)
+  def package_info(self):
+    self.cpp_info.libs = ["Dreich"]
