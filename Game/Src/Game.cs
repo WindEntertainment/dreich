@@ -1,5 +1,5 @@
-using Wind.Math;
 using System.Runtime.InteropServices;
+using Wind.Math;
 
 internal class Game {
   [DllImport("renderer.dll", CallingConvention = CallingConvention.Cdecl)]
