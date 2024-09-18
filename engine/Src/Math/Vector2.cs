@@ -3,8 +3,7 @@ using System.Runtime.CompilerServices;
 
 namespace Wind.Math;
 
-public struct Vec2<T>(T x, T y) where T : INumber<T>
-{
+public struct Vec2<T>(T x, T y) where T : INumber<T> {
   public T x = x;
   public T y = y;
 
