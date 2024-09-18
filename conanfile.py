@@ -103,3 +103,6 @@ class MyConanFile(ConanFile):
 
   def package_info(self):
     self.cpp_info.libs = ["Dreich"]
+
+  def deploy(self):
+    copy(self, "*", src=self.package_folder, dst=self.deploy_folder)
