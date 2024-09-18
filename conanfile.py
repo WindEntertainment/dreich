@@ -55,7 +55,6 @@ class MyConanFile(ConanFile):
   }
 
   default_options = {
-    "*:shared": True,
     "boost/*:header_only": False,
     "boost/*:without_charconv": False,
     "boost/*:without_container": False,
@@ -106,4 +105,4 @@ class MyConanFile(ConanFile):
     self.cpp_info.libs = ["Dreich"]
 
   def deploy(self):
-      copy(self, "*", src=self.package_folder, dst=self.deploy_folder)
+    copy(self, "*", src=self.package_folder, dst=self.deploy_folder)
