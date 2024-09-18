@@ -167,11 +167,11 @@ jobs:
         run: |
           if gh release view $sha > /dev/null 2>&1; then
             echo "\nexists\n"
-            gh release upload $sha $(pwd)/releases/wind.zip#${{matrix.config.os}} --clobber
+            gh release upload $sha $(pwd)/releases/wind.zip#${{matrix.config.os}}
           else
             echo "\ncreated\n"
             gh release create $sha --title "Release $artifact" --generate-notes --latest
-            gh release upload $sha $(pwd)/releases/wind.zip#${{matrix.config.os}} --clobber
+            gh release upload $sha $(pwd)/releases/wind.zip#${{matrix.config.os}}
           fi
 
       # - name: Output result
