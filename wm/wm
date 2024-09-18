@@ -40,6 +40,9 @@ case "$wm_command" in
     root=$(find_config)
     "$(find_wm)/add-script.sh" --root "$root" "${script_options[@]}" ;;
 
+  "health")
+    "$(find_wm)/health.sh" ;;
+
   "config-path")
     echo "Config: $(find_config)" ;;
 
