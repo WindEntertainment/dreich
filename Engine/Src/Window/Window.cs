@@ -1,4 +1,4 @@
-﻿using Wind.Mathf;
+﻿using Wind.Math;
 using static SDL2.SDL;
 
 namespace Wind {

@@ -9,4 +9,4 @@ set(SOURCES
 )
 
 add_library(${PROJECT_NAME} SHARED ${HEADERS} ${SOURCES})
-target_include_directories(${PROJECT_NAME} PRIVATE ./include/)
+include_directories(./include/)

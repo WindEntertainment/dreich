@@ -10,3 +10,5 @@ set(SOURCES
 
 add_library(${PROJECT_NAME} SHARED ${HEADERS} ${SOURCES})
 target_include_directories(${PROJECT_NAME} PRIVATE ./include/)
+
+target_link_libraries(${PROJECT_NAME} PRIVATE math)

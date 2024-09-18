@@ -1,7 +1,7 @@
 using static SDL2.SDL;
 
 using Wind.Logging;
-using Wind.Mathf;
+using Wind.Math;
 
 namespace Wind {
   public class WindEngine {
