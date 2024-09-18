@@ -11,7 +11,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Engine\wind.csproj" />
+    <ProjectReference Include="..\engine\Wind.csproj" />
   </ItemGroup>
 
   <ItemGroup>

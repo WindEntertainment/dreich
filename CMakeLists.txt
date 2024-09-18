@@ -32,9 +32,9 @@ if(ENABLE_TESTS AND CMAKE_BUILD_TYPE STREQUAL "Debug")
   add_subdirectory(./tests/)
 endif()
 
-add_subdirectory(./Math/Native/)
-add_subdirectory(./Renderer/Native)
-add_subdirectory(./Logger/Native)
+add_subdirectory(./math/)
+add_subdirectory(./renderer/)
+add_subdirectory(./logger/)
 
 add_library(${PROJECT_NAME} SHARED empty.cpp)
 target_link_libraries(${PROJECT_NAME} ${MATH_LIB} ${RENDERER_LIB} ${LOGGER_LIB})

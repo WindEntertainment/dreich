@@ -28,9 +28,9 @@ else
 
   symlink_path='/usr/local/bin/wm'
 
-  if [ ! -d "$symlink_path" ]; then
-    mkdir -p "$symlink_path"
-  fi
+  # if [ ! -d "$symlink_path" ]; then
+  #   # mkdir -p "$symlink_path"
+  # fi
 
   ln -sf "$symlink_origin_path"  $symlink_path
 
