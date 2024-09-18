@@ -176,23 +176,15 @@ jobs:
         run: |
           echo "Release exists: ${{ env.release_exists }}"
 
-      # - name: Check if release exists
-      #   id: check_release
-      #   run: |
-      #     if gh release view ${{ github.sha }} > /dev/null 2>&1; then
-      #       echo "release_exists=true" >> $GITHUB_ENV
-      #     else
-      #       echo "release_exists=false" >> $GITHUB_ENV
-
-      # - name: Create release (if not exists)
-      #   if: env.release_exists == 'false'
-      #   id: create_release
-      #   uses: actions/create-release@v1
-      #   with:
-      #     tag_name: ${{ github.sha }}
-      #     release_name: 'Release ${{ github.sha }}'
-      #     draft: false
-      #     prerelease: false
+      - name: Create release (if not exists)
+        if: env.release_exists == 'false'
+        id: create_release
+        uses: actions/create-release@v1
+        with:
+          tag_name: ${{ github.sha }}
+          release_name: 'Release ${{ github.sha }}'
+          draft: false
+          prerelease: false
 
       # - name: Upload file with OS name
       #   if: env.release_exists == 'false'
@@ -203,11 +195,15 @@ jobs:
       #     asset_name: ${{ matrix.os }}-wind.zip
       #     asset_content_type: application/zip
 
-      # - name: Upload file with OS name to existing release
-      #   if: env.release_exists == 'true'
-      #   run: |
-      #     release_url=$(gh release view ${{ github.sha }} --json uploadUrl --jq .uploadUrl)
-      #     gh release upload ${{ github.sha }} $(pwd)/releases/wind.zip --clobber
+      - name: Upload file with OS name to existing release
+        if: env.release_exists == 'true'
+        run: |
+          gh release upload ${{ github.sha }} $(pwd)/releases/wind.zip --clobber
+
+      - name: Upload file with OS name to existing release
+        if: env.release_exists == 'false'
+        run: |
+          gh release create $sha --title "Release $artifact" --generate-notes --latest $(pwd)/releases/wind.zip
 
       # - name: Upload package as release
       #   shell: bash
