@@ -1,12 +1,12 @@
-project(math)
+project(${MATH_LIB})
 
 set(HEADERS
     ./include/math.hpp
 )
 
-set(SOURCES 
+set(SOURCES
     ./src/math.cpp
 )
 
-add_library(${PROJECT_NAME} SHARED ${HEADERS} ${SOURCES})
+add_library(${PROJECT_NAME} STATIC ${HEADERS} ${SOURCES})
 include_directories(./include/)

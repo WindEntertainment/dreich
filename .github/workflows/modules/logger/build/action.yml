@@ -1,0 +1,16 @@
+name: Build logger
+description: Build logger
+
+runs:
+  using: 'composite'
+  steps:
+    - name: Prepare logger env
+      uses: ./.github/workflows/modules/logger/setup-env
+
+    - name: Build logger with wm
+      shell: bash
+      run: |
+        export CC=${{ env.cc }}
+        export CXX=${{ env.cxx }}
+
+        wm run cmake-build -t logger -bt ${{ env.conanBuildType }}

@@ -1,0 +1,12 @@
+name: Build engine
+description: Build engine
+
+runs:
+  using: 'composite'
+  steps:
+    - name: Prepare engine env
+      uses: ./.github/workflows/modules/engine/setup-env
+
+    - name: Build
+      shell: bash
+      run: dotnet ${{ env.dotnetBuildType }}

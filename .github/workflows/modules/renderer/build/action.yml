@@ -1,0 +1,16 @@
+name: Build renderer
+description: Build renderer
+
+runs:
+  using: 'composite'
+  steps:
+    - name: Prepare renderer env
+      uses: ./.github/workflows/modules/renderer/setup-env
+
+    - name: Build renderer with wm
+      shell: bash
+      run: |
+        export CC=${{ env.cc }}
+        export CXX=${{ env.cxx }}
+
+        wm run cmake-build -t renderer -bt ${{ env.conanBuildType }}

@@ -1,0 +1,12 @@
+name: Test engine
+description: Test engine
+
+runs:
+  using: 'composite'
+  steps:
+    - name: Prepare engine env
+      uses: ./.github/workflows/modules/engine/setup-env
+
+    - name: Test
+      shell: bash
+      run: cd tests/Engine && dotnet test

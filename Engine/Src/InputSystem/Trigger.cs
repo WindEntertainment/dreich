@@ -1,5 +1,5 @@
-global using Keys = System.Collections.Generic.HashSet<Wind.InputSystem.Key>;
 global using Callbacks = System.Action<Wind.InputSystem.InputSystemContext>;
+global using Keys = System.Collections.Generic.HashSet<Wind.InputSystem.Key>;
 
 namespace Wind {
   public partial class InputSystem {

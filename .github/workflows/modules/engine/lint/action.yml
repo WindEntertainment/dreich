@@ -1,0 +1,9 @@
+name: Lint engine
+description: Lint engine
+
+runs:
+  using: 'composite'
+  steps:
+    - name: Lint
+      shell: bash
+      run: dotnet format
