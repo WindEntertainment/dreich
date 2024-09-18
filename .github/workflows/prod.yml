@@ -168,7 +168,8 @@ jobs:
           if gh release view ${{ github.sha }} > /dev/null 2>&1; then
             gh release upload ${{ github.sha }} $(pwd)/releases/wind.zip --clobber --name ${{matrix.config.os}}
           else
-            gh release create ${{ github.sha }} --title "Release $artifact" --generate-notes --latest --name ${{matrix.config.os}} $(pwd)/releases/wind.zip
+            gh release create ${{ github.sha }} --title "Release $artifact" --generate-notes --latest
+            gh release upload ${{ github.sha }} $(pwd)/releases/wind.zip --clobber --name ${{matrix.config.os}}
           fi
 
       - name: Output result
