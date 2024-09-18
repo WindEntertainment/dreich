@@ -171,20 +171,20 @@ jobs:
             echo "release_exists=false" >> $GITHUB_ENV
           fi
 
-      - name: Output result
-        shell: bash
-        run: |
-          echo "Release exists: ${{ env.release_exists }}"
+      # - name: Output result
+      #   shell: bash
+      #   run: |
+      #     echo "Release exists: ${{ env.release_exists }}"
 
-      - name: Create release (if not exists)
-        if: env.release_exists == 'false'
-        id: create_release
-        uses: actions/create-release@v1
-        with:
-          tag_name: ${{ github.sha }}
-          release_name: 'Release ${{ github.sha }}'
-          draft: false
-          prerelease: false
+      # - name: Create release (if not exists)
+      #   if: env.release_exists == 'false'
+      #   id: create_release
+      #   uses: actions/create-release@v1
+      #   with:
+      #     tag_name: ${{ github.sha }}
+      #     release_name: 'Release ${{ github.sha }}'
+      #     draft: false
+      #     prerelease: false
 
       # - name: Upload file with OS name
       #   if: env.release_exists == 'false'
