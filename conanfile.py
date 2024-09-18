@@ -103,7 +103,8 @@ class MyConanFile(ConanFile):
     cmake.build()
 
   def package_info(self):
+    super().package_info()
     self.cpp_info.libs = ["Dreich"]
 
   def deploy(self):
-      copy(self, "*", src=self.package_folder, dst=self.deploy_folder)
+    copy(self, "*", src=self.package_folder, dst=self.deploy_folder)
