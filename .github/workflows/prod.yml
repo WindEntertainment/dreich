@@ -171,10 +171,10 @@ jobs:
             echo "release_exists=false" >> $GITHUB_ENV
           fi
 
-      # - name: Output result
-      #   shell: bash
-      #   run: |
-      #     echo "Release exists: ${{ env.release_exists }}"
+      - name: Output result
+        shell: bash
+        run: |
+          echo "Release exists: ${{ env.release_exists }}"
 
       # - name: Create release (if not exists)
       #   if: env.release_exists == 'false'
