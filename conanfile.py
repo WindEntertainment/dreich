@@ -2,6 +2,7 @@ import os
 
 from conan import ConanFile
 from conan.tools.cmake import CMakeToolchain, CMake, cmake_layout, CMakeDeps
+from conan.tools.files import copy
 
 class MyConanFile(ConanFile):
   name = "dreich"
