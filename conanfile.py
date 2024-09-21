@@ -12,10 +12,12 @@ class MyConanFile(ConanFile):
   exports_sources = "*"
   requires = [
     "boost/1.85.0",
-    # "sdl/2.30.7"
+    "sdl/2.30.7",
+    "fmt/11.0.2",
+    "glad/0.1.36",
   ]
 
-  options = {
+  options = { 
     "boost/*:header_only": [None, True, False],
     "boost/*:without_charconv": [None, True, False],
     "boost/*:without_container": [None, True, False],
@@ -55,6 +57,30 @@ class MyConanFile(ConanFile):
   }
 
   default_options = {
+    "sdl/*:directx": False,
+    "sdl/*:alsa": False,
+    "sdl/*:jack": False,
+    "sdl/*:pulse": False,
+    "sdl/*:sndio": False,
+    "sdl/*:nas": False,
+    "sdl/*:esd": False,
+    "sdl/*:arts": False,
+    "sdl/*:x11": False,
+    "sdl/*:xcursor": False,
+    "sdl/*:xinerama": False,
+    "sdl/*:xinput": False,
+    "sdl/*:xrandr": False,
+    "sdl/*:xscrnsaver": False,
+    "sdl/*:xshape": False,
+    "sdl/*:xvm": False,
+    "sdl/*:wayland": False,
+    "sdl/*:directfb": False,
+    "sdl/*:video_": False,
+    "sdl/*:sdl2main": False,
+    "sdl/*:opengl": False,
+    "sdl/*:opengles": False,
+    "sdl/*:vulkan": False,
+    "sdl/*:libunwind": False,
     "boost/*:header_only": False,
     "boost/*:without_charconv": False,
     "boost/*:without_container": False,

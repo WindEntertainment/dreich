@@ -4,15 +4,14 @@ project(wind)
 
 message("Building with CMake version: ${CMAKE_VERSION}")
 
+###===================================================================================##
+
 set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
-
-set(MATH_LIB math)
-set(RENDERER_LIB renderer)
-set(LOGGER_LIB logger)
-
 add_compile_options(-fms-extensions)
+
+###===================================================================================##
 
 if(ENABLE_TESTS AND CMAKE_BUILD_TYPE STREQUAL "Debug")
   message("Testing enabled")
@@ -32,12 +31,40 @@ if(ENABLE_TESTS AND CMAKE_BUILD_TYPE STREQUAL "Debug")
   add_subdirectory(./tests/)
 endif()
 
-add_subdirectory(./math/)
-add_subdirectory(./renderer/)
-add_subdirectory(./logger/)
+###===================================================================================##
 
-add_library(${PROJECT_NAME} SHARED empty.cpp)
-target_link_libraries(${PROJECT_NAME} ${MATH_LIB} ${RENDERER_LIB} ${LOGGER_LIB})
+set(HEADERS
+    ./native/include/window.hpp
+    ./native/include/renderer.hpp
+)
+
+set(SOURCES
+    ./native/src/renderer.cpp
+    ./native/src/window.cpp
+)
+
+add_library(${PROJECT_NAME} SHARED ${HEADERS} ${SOURCES})
+target_include_directories(${PROJECT_NAME} PRIVATE ./native/include/)
+
+###===================================================================================##
+
+find_package(fmt CONFIG REQUIRED)
+target_link_libraries(${PROJECT_NAME} PUBLIC fmt::fmt-header-only)  
+
+find_package(SDL2 REQUIRED)
+target_link_libraries(${PROJECT_NAME} PUBLIC SDL2::SDL2main)
+target_link_libraries(${PROJECT_NAME} PUBLIC SDL2::SDL2)
+
+set(glad_DIR "./build/Debug/generators")
+find_package(glad CONFIG REQUIRED)
+target_link_libraries(${PROJECT_NAME} PUBLIC glad::glad)
+
+find_package(OpenGL REQUIRED)
+target_link_libraries(${PROJECT_NAME} PUBLIC ${OPENGL_LIBRARIES})
+target_include_directories(${PROJECT_NAME} PUBLIC ${OPENGL_INCLUDE_DIR})
+
+
+###===================================================================================##
 
 add_custom_command(TARGET ${PROJECT_NAME}
   POST_BUILD
@@ -45,5 +72,13 @@ add_custom_command(TARGET ${PROJECT_NAME}
   WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
   COMMENT "Running dotnet publish"
 )
+
+###===================================================================================##
+
+add_executable(${PROJECT_NAME}-exe ${HEADERS} ${SOURCES} ./native/src/main.cpp)
+target_include_directories(${PROJECT_NAME}-exe PRIVATE ./native/include/)
+target_link_libraries(${PROJECT_NAME}-exe PUBLIC ${PROJECT_NAME})
+
+###===================================================================================##
 
 include(cpack/cpack.cmake)

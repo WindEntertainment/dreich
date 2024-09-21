@@ -2,14 +2,19 @@ using System.Runtime.InteropServices;
 using Wind.Math;
 
 internal class Game {
-  [DllImport("renderer.dll", CallingConvention = CallingConvention.Cdecl)]
-  public static extern int testRenderLib(int a, int b);
+  [DllImport("wind.so", EntryPoint = "windInitRenderer", CallingConvention = CallingConvention.Cdecl)]
+  public static extern bool WindInitRenderer();
 
-  public static void Main(String[] args) {
-    Vec2<int> test = new(5, 6);
+  [DllImport("wind.so", EntryPoint = "windCreateWindow", CallingConvention = CallingConvention.Cdecl)]
+  public static extern IntPtr WindCreateWindow(int position_x, int position_y, int width, int height, string title);
 
-    var result = testRenderLib(5, 2);
+  public static void Main(string[] args) {
+    var result = WindInitRenderer();
     Console.WriteLine(result);
+
+    WindCreateWindow(100, 100, 800, 600, "Hello From C#");
+
+    Task.Delay(1000).Wait();
     // WindEngine engine = new();
     // var assetDatabase = WindServices.Get<AssetDatabase>();
     // assetDatabase.LoadBundle("Data/Main");
