@@ -13,7 +13,7 @@ runs:
     - name: Create default profile
       shell: bash
       run: |
-        conan profile detect
+        conan profile detect --force
 
     - name: Config profile
       run: |
