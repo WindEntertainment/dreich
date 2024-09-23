@@ -7,10 +7,11 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
 
   <ItemGroup>
-    <!-- <ProjectReference Include="..\Engine\wind.csproj" /> -->
+    <ProjectReference Include="..\engine\Wind.csproj" />
   </ItemGroup>
 
   <ItemGroup>

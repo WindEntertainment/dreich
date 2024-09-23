@@ -20,5 +20,6 @@ conan-deploy
 [Ll]ogs/
 [Rr]eleases/
 
+/.cache/
 !/.github/**
 !/.vscode/**
