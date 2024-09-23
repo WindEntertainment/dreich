@@ -185,8 +185,8 @@ jobs:
               os: 'windows-latest',
               dotnetBuildType: 'build',
               conanBuildType: 'Debug',
-              cc: 'clang',
-              cxx: 'clang++',
+              cc: 'emcc',
+              cxx: 'em++',
               isRelease: false,
             }
           - {
@@ -197,8 +197,8 @@ jobs:
               os: 'ubuntu-latest',
               dotnetBuildType: 'build',
               conanBuildType: 'Debug',
-              cc: 'clang',
-              cxx: 'clang++',
+              cc: 'emcc',
+              cxx: 'em++',
               isRelease: false,
             }
           - {
@@ -209,8 +209,8 @@ jobs:
               os: 'macos-14',
               dotnetBuildType: 'build',
               conanBuildType: 'Debug',
-              cc: 'clang',
-              cxx: 'clang++',
+              cc: 'emcc',
+              cxx: 'em++',
               isRelease: false,
             }
     steps:
