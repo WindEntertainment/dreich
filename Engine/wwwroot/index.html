@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<!--  Licensed to the .NET Foundation under one or more agreements. -->
+<!-- The .NET Foundation licenses this file to you under the MIT license. -->
+<html>
+  <head>
+    <title>wasm</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script type="module" src="./main.js"></script>
+    <link href="index.css" rel="stylesheet" />
+  </head>
+
+  <body>
+    <span id="out"></span>
+    <canvas id="game"></canvas>
+    <script id="vertex-shader-2d" type="notjs">
+      attribute vec4 a_position;
+
+      void main() {
+        gl_Position = a_position;
+      }
+    </script>
+    <script id="fragment-shader-2d" type="notjs">
+      precision mediump float;
+
+      void main() {
+        gl_FragColor = vec4(1, 0, 0.5, 1); // return redish-purple
+      }
+    </script>
+  </body>
+</html>

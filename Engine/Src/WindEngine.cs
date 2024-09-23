@@ -2,8 +2,28 @@ using Wind.Logging;
 using Wind.Mathf;
 using static SDL2.SDL;
 
+#if web
+using System;
+using System.Runtime.InteropServices.JavaScript;
+#endif
+
+Console.WriteLine("12");
+
 namespace Wind {
-  public class WindEngine {
+  public partial class WindEngine {
+
+#if web
+    [JSExport]
+    internal static string PoweredBy() {
+      var text = $"Powered by wind on {GetHRef()}";
+      Console.WriteLine(text);
+      return text;
+    }
+
+    [JSImport("window.location.href", "main.js")]
+    internal static partial string GetHRef();
+#endif
+
     private Logger logger;
     private Window window;
 
