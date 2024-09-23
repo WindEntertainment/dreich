@@ -1,0 +1,16 @@
+name: Build native
+description: Build native
+
+runs:
+  using: 'composite'
+  steps:
+    - name: Prepare native env
+      uses: ./.github/workflows/modules/native/setup-env
+
+    - name: Build native with wm
+      shell: bash
+      run: |
+        export CC=${{ env.cc }}
+        export CXX=${{ env.cxx }}
+
+        wm run cmake-build -t native -bt ${{ env.conanBuildType }}

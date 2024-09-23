@@ -44,12 +44,14 @@ jobs:
         uses: './.github/workflows/utils/json-to-env'
         with:
           json: ${{ toJSON(matrix.config) }}
-      - name: Logger
-        uses: './.github/workflows/modules/logger/lint'
-      - name: Math
-        uses: './.github/workflows/modules/math/lint'
-      - name: Renderer
-        uses: './.github/workflows/modules/renderer/lint'
+      # - name: Logger
+      #   uses: './.github/workflows/modules/logger/lint'
+      # - name: Math
+      #   uses: './.github/workflows/modules/math/lint'
+      # - name: Renderer
+      #   uses: './.github/workflows/modules/renderer/lint'
+      - name: Native
+        uses: './.github/workflows/modules/native/lint'
       - name: Engine
         uses: './.github/workflows/modules/engine/lint'
       - name: Linting commit
@@ -144,11 +146,13 @@ jobs:
         with:
           json: ${{ toJSON(matrix.config) }}
       - uses: ./.github/workflows/utils/setup-base-libs
-      - name: Logger
-        uses: './.github/workflows/modules/logger/build'
-      - name: Math
-        uses: './.github/workflows/modules/math/build'
-      - name: Renderer
-        uses: './.github/workflows/modules/renderer/build'
+      # - name: Logger
+      #   uses: './.github/workflows/modules/logger/build'
+      # - name: Math
+      #   uses: './.github/workflows/modules/math/build'
+      # - name: Renderer
+      #   uses: './.github/workflows/modules/renderer/build'
+      - name: Native
+        uses: './.github/workflows/modules/native/build'
       - name: Engine
         uses: './.github/workflows/modules/engine/build'
