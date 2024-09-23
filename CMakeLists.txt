@@ -6,7 +6,11 @@ message("Building with CMake version: ${CMAKE_VERSION}")
 
 ###===================================================================================##
 
+list(APPEND CMAKE_PREFIX_PATH "${CMAKE_BINARY_DIR}")
+
 set(CMAKE_CXX_STANDARD 23)
+# set(CMAKE_C_COMPILER "emcc")
+# set(CMAKE_CXX_COMPILER "em++")
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 add_compile_options(-fms-extensions)
@@ -52,8 +56,11 @@ find_package(fmt CONFIG REQUIRED)
 target_link_libraries(${PROJECT_NAME} PUBLIC fmt::fmt-header-only)
 
 find_package(SDL2 REQUIRED)
-target_link_libraries(${PROJECT_NAME} PUBLIC SDL2::SDL2main)
-target_link_libraries(${PROJECT_NAME} PUBLIC SDL2::SDL2)
+if(APPLE)
+  target_link_libraries(${PROJECT_NAME} PUBLIC SDL2::SDL2)
+else()
+  target_link_libraries(${PROJECT_NAME} PUBLIC SDL2::SDL2main SDL2::SDL2)
+endif()
 
 set(glad_DIR "./build/Debug/generators")
 find_package(glad CONFIG REQUIRED)

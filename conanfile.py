@@ -57,6 +57,7 @@ class MyConanFile(ConanFile):
   }
 
   default_options = {
+    "fmt/*:header_only": True,
     "sdl/*:directx": False,
     "sdl/*:alsa": False,
     "sdl/*:jack": False,
