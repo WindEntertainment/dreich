@@ -1,4 +1,4 @@
-#define BOOST_TEST_MODULE renderer
+#define BOOST_TEST_MODULE native
 #include <boost/test/included/unit_test.hpp>
 
 int add(int a, int b) {

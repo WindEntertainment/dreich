@@ -1,4 +1,4 @@
-project(logger-tests)
+project(native-tests)
 
 find_package(Boost REQUIRED COMPONENTS unit_test_framework)
 
@@ -10,4 +10,4 @@ target_compile_options(${PROJECT_NAME} PRIVATE --coverage)
 target_link_options(${PROJECT_NAME} PRIVATE --coverage)
 
 include(CTest)
-add_test(NAME logger COMMAND ${PROJECT_NAME})
+add_test(NAME native COMMAND ${PROJECT_NAME})
