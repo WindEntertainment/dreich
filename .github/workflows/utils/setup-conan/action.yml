@@ -16,7 +16,7 @@ runs:
         conan profile detect --force
 
     - name: Config profile
-      if: env.wasm == 'true'
+      if: env.wasm == 'false'
       run: |
         if [ "$RUNNER_OS" == "Linux" ]; then
           echo "
@@ -71,7 +71,7 @@ runs:
       shell: bash
 
     - name: Config profile
-      if: env.wasm == 'false'
+      if: env.wasm == 'true'
       run: |
         if [ "$RUNNER_OS" == "Linux" ]; then
           echo "
