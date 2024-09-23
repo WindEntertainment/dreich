@@ -65,7 +65,12 @@ else()
   target_link_libraries(${PROJECT_NAME} PUBLIC SDL2::SDL2main SDL2::SDL2)
 endif()
 
-set(glad_DIR "./build/Debug/generators")
+
+if(BUILD_WASM)
+  set(glad_DIR "./build/web/build/Debug/generators")
+else()
+  set(glad_DIR "./build/app/build/Debug/generators")
+endif()
 find_package(glad CONFIG REQUIRED)
 target_link_libraries(${PROJECT_NAME} PUBLIC glad::glad)
 

@@ -26,7 +26,7 @@ fi
 
 wm run cmake-configure --build-type Debug --with-testing
 
-cd "$root/build/Debug/tests" || exit
+cd "$root/build/app/build/Debug/tests" || exit
 
 make
 ctest
