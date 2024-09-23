@@ -21,7 +21,7 @@ runs:
       if: env.os == 'macos-14'
       with:
         run: |
-          brew install p7zip llvm cmake conan
+          brew install p7zip llvm cmake conan emscripten
         path: $(brew --prefix)
         cache: yes
         key: ${{ env.envHash }}-${{ env.os }}-brew
