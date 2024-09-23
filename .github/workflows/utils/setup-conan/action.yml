@@ -14,9 +14,9 @@ runs:
       shell: bash
       run: |
         conan profile detect --force
+        conan profile detect --force --name wasm
 
     - name: Config profile
-      if: env.wasm == 'false'
       run: |
         if [ "$RUNNER_OS" == "Linux" ]; then
           echo "
@@ -70,8 +70,7 @@ runs:
         fi
       shell: bash
 
-    - name: Config profile
-      if: env.wasm == 'true'
+    - name: Config wasm profile
       run: |
         if [ "$RUNNER_OS" == "Linux" ]; then
           echo "
@@ -89,7 +88,7 @@ runs:
             tools.system.package_manager:mode=install
             tools.system.package_manager:sudo=True
             tools.cmake.cmaketoolchain:generator=Unix Makefiles
-          " > /home/runner/.conan2/profiles/default
+          " > /home/runner/.conan2/profiles/wasm
         elif [ "$RUNNER_OS" == "Windows" ]; then
           echo "
             [settings]
@@ -108,7 +107,7 @@ runs:
             [buildenv]
             CC=clang-cl.exe
             CXX=clang-cl.exe
-          " > C:\\Users\\runneradmin\\.conan2\\profiles\\default
+          " > C:\\Users\\runneradmin\\.conan2\\profiles\\wasm
         elif [ "$RUNNER_OS" == "macOS" ]; then
           echo "
             [settings]
@@ -125,7 +124,7 @@ runs:
             tools.system.package_manager:mode=install
             tools.system.package_manager:sudo=True
             tools.cmake.cmaketoolchain:generator=Unix Makefiles
-          " > /Users/runner/.conan2/profiles/default
+          " > /Users/runner/.conan2/profiles/wasm
         else
           echo "$RUNNER_OS not supported"
           exit 1
@@ -136,8 +135,17 @@ runs:
       uses: ./.github/workflows/utils/cache/get-conan-cache
 
     - name: Install dependencies
+      if: env.wasm == 'false'
       shell: bash
       run: |
         export CC=${{ env.cc }}
         export CXX=${{ env.cxx }}
         wm run conan-install -bt ${{ env.conanBuildType }}
+
+    - name: Install dependencies
+      if: env.wasm == 'true'
+      shell: bash
+      run: |
+        export CC=${{ env.cc }}
+        export CXX=${{ env.cxx }}
+        wm run conan-install -bt ${{ env.conanBuildType }} -w
