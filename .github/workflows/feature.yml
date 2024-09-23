@@ -27,7 +27,7 @@ jobs:
         config:
           - {
               name: 'Ubuntu',
-              wasm: false,
+              wasm: 'false',
               projectRoot: '/home/runner/work/dreich',
               artifact: 'dreich-linux',
               os: 'ubuntu-latest',
@@ -63,7 +63,7 @@ jobs:
         config:
           - {
               name: 'MacOS',
-              wasm: false,
+              wasm: 'false',
               projectRoot: '/Users/runner/work/dreich',
               artifact: 'dreich-macos',
               os: 'macos-14',
@@ -102,7 +102,7 @@ jobs:
         config:
           - {
               name: 'Windows',
-              wasm: false,
+              wasm: 'false',
               projectRoot: 'D:/a/dreich',
               artifact: 'dreich-windows',
               os: 'windows-latest',
@@ -114,7 +114,7 @@ jobs:
             }
           - {
               name: 'Ubuntu',
-              wasm: false,
+              wasm: 'false',
               projectRoot: '/home/runner/work/dreich',
               artifact: 'dreich-linux',
               os: 'ubuntu-latest',
@@ -126,7 +126,7 @@ jobs:
             }
           - {
               name: 'MacOS',
-              wasm: false,
+              wasm: 'false',
               projectRoot: '/Users/runner/work/dreich',
               artifact: 'dreich-macos',
               os: 'macos-14',
@@ -160,7 +160,7 @@ jobs:
       matrix:
         config:
           - {
-              wasm: true,
+              wasm: 'true',
               name: 'Windows',
               projectRoot: 'D:/a/dreich',
               artifact: 'dreich-windows',
@@ -172,7 +172,7 @@ jobs:
               isRelease: false,
             }
           - {
-              wasm: true,
+              wasm: 'true',
               name: 'Ubuntu',
               projectRoot: '/home/runner/work/dreich',
               artifact: 'dreich-linux',
@@ -184,7 +184,7 @@ jobs:
               isRelease: false,
             }
           - {
-              wasm: true,
+              wasm: 'true',
               name: 'MacOS',
               projectRoot: '/Users/runner/work/dreich',
               artifact: 'dreich-macos',
