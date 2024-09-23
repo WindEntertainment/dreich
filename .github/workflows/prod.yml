@@ -25,6 +25,7 @@ jobs:
         config:
           - {
               name: 'Ubuntu',
+              wasm: false,
               projectRoot: '/home/runner/work/dreich',
               artifact: '${{ github.event.pull_request.title }}',
               os: 'ubuntu-latest',
@@ -44,12 +45,6 @@ jobs:
         uses: './.github/workflows/utils/json-to-env'
         with:
           json: ${{ toJSON(matrix.config) }}
-      # - name: Logger
-      #   uses: './.github/workflows/modules/logger/lint'
-      # - name: Math
-      #   uses: './.github/workflows/modules/math/lint'
-      # - name: Renderer
-      #   uses: './.github/workflows/modules/renderer/lint'
       - name: Native
         uses: './.github/workflows/modules/native/lint'
       - name: Engine
@@ -66,6 +61,7 @@ jobs:
         config:
           - {
               name: 'MacOS',
+              wasm: false,
               projectRoot: '/Users/runner/work/dreich',
               artifact: '${{ github.event.pull_request.title }}',
               os: 'macos-14',
@@ -107,6 +103,7 @@ jobs:
         config:
           - {
               name: 'Windows',
+              wasm: false,
               projectRoot: 'D:/a/dreich',
               artifact: '${{ github.event.pull_request.title }}',
               os: 'windows-latest',
@@ -118,6 +115,7 @@ jobs:
             }
           - {
               name: 'Ubuntu',
+              wasm: false,
               projectRoot: '/home/runner/work/dreich',
               artifact: '${{ github.event.pull_request.title }}',
               os: 'ubuntu-latest',
@@ -129,6 +127,7 @@ jobs:
             }
           - {
               name: 'MacOS',
+              wasm: false,
               projectRoot: '/Users/runner/work/dreich',
               artifact: '${{ github.event.pull_request.title }}',
               os: 'macos-14',
@@ -149,12 +148,6 @@ jobs:
         with:
           json: ${{ toJSON(matrix.config) }}
       - uses: ./.github/workflows/utils/setup-base-libs
-      # - name: Logger
-      #   uses: './.github/workflows/modules/logger/build'
-      # - name: Math
-      #   uses: './.github/workflows/modules/math/build'
-      # - name: Renderer
-      #   uses: './.github/workflows/modules/renderer/build'
       - name: Native
         uses: './.github/workflows/modules/native/build'
       - name: Engine
@@ -176,3 +169,62 @@ jobs:
             gh release create $sha --title "Release $artifact" --generate-notes --latest
             gh release upload $sha $(pwd)/releases/${{matrix.config.os}}.zip
           fi
+
+  building_wasm:
+    name: 'Build wasm: ${{ matrix.config.name }}'
+    runs-on: ${{ matrix.config.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        config:
+          - {
+              wasm: true,
+              name: 'Windows',
+              projectRoot: 'D:/a/dreich',
+              artifact: 'dreich-windows',
+              os: 'windows-latest',
+              dotnetBuildType: 'build',
+              conanBuildType: 'Debug',
+              cc: 'clang',
+              cxx: 'clang++',
+              isRelease: false,
+            }
+          - {
+              wasm: true,
+              name: 'Ubuntu',
+              projectRoot: '/home/runner/work/dreich',
+              artifact: 'dreich-linux',
+              os: 'ubuntu-latest',
+              dotnetBuildType: 'build',
+              conanBuildType: 'Debug',
+              cc: 'clang',
+              cxx: 'clang++',
+              isRelease: false,
+            }
+          - {
+              wasm: true,
+              name: 'MacOS',
+              projectRoot: '/Users/runner/work/dreich',
+              artifact: 'dreich-macos',
+              os: 'macos-14',
+              dotnetBuildType: 'build',
+              conanBuildType: 'Debug',
+              cc: 'clang',
+              cxx: 'clang++',
+              isRelease: false,
+            }
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          lfs: false
+      - name: Env
+        uses: './.github/workflows/utils/json-to-env'
+        with:
+          json: ${{ toJSON(matrix.config) }}
+      - uses: ./.github/workflows/utils/setup-base-libs
+      - name: Native
+        uses: './.github/workflows/modules/native/build'
+      - name: Engine
+        uses: './.github/workflows/modules/engine/build'

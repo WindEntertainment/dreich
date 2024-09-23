@@ -16,6 +16,7 @@ runs:
         conan profile detect --force
 
     - name: Config profile
+      if: env.wasm
       run: |
         if [ "$RUNNER_OS" == "Linux" ]; then
           echo "
@@ -58,6 +59,68 @@ runs:
             compiler.libcxx=libc++
             compiler.version=15
             os=Macos
+            [conf]
+            tools.system.package_manager:mode=install
+            tools.system.package_manager:sudo=True
+            tools.cmake.cmaketoolchain:generator=Unix Makefiles
+          " > /Users/runner/.conan2/profiles/default
+        else
+          echo "$RUNNER_OS not supported"
+          exit 1
+        fi
+      shell: bash
+
+    - name: Config profile
+      if: !env.wasm
+      run: |
+        if [ "$RUNNER_OS" == "Linux" ]; then
+          echo "
+            [settings]
+            arch=wasm
+            compiler=clang
+            build_type=${{ env.conanBuildType }}
+            compiler.cppstd=gnu23
+            compiler.libcxx=libc++
+            compiler.version=15
+            os=Emscripten
+            [tool_requires]
+            emsdk/3.1.44
+            [conf]
+            tools.system.package_manager:mode=install
+            tools.system.package_manager:sudo=True
+            tools.cmake.cmaketoolchain:generator=Unix Makefiles
+          " > /home/runner/.conan2/profiles/default
+        elif [ "$RUNNER_OS" == "Windows" ]; then
+          echo "
+            [settings]
+            arch=wasm
+            compiler=clang
+            build_type=${{ env.conanBuildType }}
+            compiler.cppstd=gnu23
+            compiler.libcxx=libc++
+            compiler.version=15
+            os=Emscripten
+            [tool_requires]
+            emsdk/3.1.44
+            [conf]
+            tools.system.package_manager:mode=install
+            tools.cmake.cmaketoolchain:generator=Unix Makefiles
+            [buildenv]
+            CC=clang-cl.exe
+            CXX=clang-cl.exe
+          " > C:\\Users\\runneradmin\\.conan2\\profiles\\default
+        elif [ "$RUNNER_OS" == "macOS" ]; then
+          echo "
+            [settings]
+            arch=wasm
+            compiler=clang
+            build_type=${{ env.conanBuildType }}
+            compiler.cppstd=gnu23
+            compiler.libcxx=libc++
+            compiler.version=15
+            os=Emscripten
+            [tool_requires]
+            emsdk/3.1.44
             [conf]
             tools.system.package_manager:mode=install
             tools.system.package_manager:sudo=True
