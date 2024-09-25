@@ -14,7 +14,7 @@ runs:
         export CC=${{ env.cc }}
         export CXX=${{ env.cxx }}
 
-        wm run cmake-build -t native -bt ${{ env.conanBuildType }}
+        wm run cmake-build -bt ${{ env.conanBuildType }}
 
     - name: Build native wasm with wm
       if: env.wasm == 'true'
@@ -23,4 +23,4 @@ runs:
         export CC=${{ env.cc }}
         export CXX=${{ env.cxx }}
 
-        wm run cmake-build -t native -bt ${{ env.conanBuildType }} -w
+        wm run cmake-build -bt ${{ env.conanBuildType }} -w
