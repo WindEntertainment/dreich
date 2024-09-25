@@ -11,6 +11,7 @@ runs:
         run: |
           apt-get update
           apt-get install gcc g++ gdb clang build-essential llvm cmake libxcb-util-dev libgl-dev libgl1-mesa-dev libx11-xcb-dev libfontenc-dev libxaw7-dev libxcomposite-dev libxcursor-dev libxdamage-dev libxfixes-dev libxi-dev libxinerama-dev libxmu-dev libxmuu-dev libxpm-dev libxrandr-dev libxres-dev libxss-dev libxtst-dev libxv-dev libxxf86vm-dev libxcb-glx0-dev libxcb-render-util0-dev libxcb-xkb-dev libxcb-icccm4-dev libxcb-image0-dev libxcb-keysyms1-dev libxcb-randr0-dev libxcb-shape0-dev libxcb-sync-dev libxcb-xfixes0-dev libxcb-xinerama0-dev libxcb-dri3-dev libxcb-cursor-dev libxcb-dri2-0-dev libxcb-dri3-dev libxcb-present-dev libxcb-composite0-dev libxcb-ewmh-dev libxcb-res0-dev emscripten -qq
+          dotnet workload install wasm-tools
         path: '/var/cache/apt/archives'
         cache: yes
         key: ${{ env.envHash }}-${{ env.os }}-apt-store
@@ -22,7 +23,8 @@ runs:
       with:
         run: |
           brew install p7zip llvm cmake conan emscripten --quiet
-        path: $(brew --prefix)
+          path: $(brew --prefix)
+          dotnet workload install wasm-tools
         cache: yes
         key: ${{ env.envHash }}-${{ env.os }}-brew
         sudo: false
@@ -37,6 +39,7 @@ runs:
       run: |
         choco install make cmake 7zip yq llvm emscripten --quiet
 
+        dotnet workload install wasm-tools
     - name: Setup wm
       shell: bash
       run: |
