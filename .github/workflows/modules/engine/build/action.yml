@@ -10,9 +10,9 @@ runs:
     - name: Build engine with wm
       if: env.wasm == 'false'
       shell: bash
-      run: dotnet ${{ env.dotnetBuildType }} Wind.csproj
+      run: dotnet ${{ env.dotnetBuildType }} Engine/Wind.csproj
 
     - name: Build engine wasm with wm
       if: env.wasm == 'true'
       shell: bash
-      run: dotnet ${{ env.dotnetBuildType }} Wind.Web.csproj
+      run: dotnet ${{ env.dotnetBuildType }} Engine/Wind.Web.csproj
