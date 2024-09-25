@@ -16,7 +16,7 @@ while [[ "$#" -gt 0 ]]; do
     -wd|--with-dotnet) flags="$flags -DBUILD_DOTNET=ON"; ;;
     -w|--wasm) wasm=true; flags="$flags -DBUILD_WASM=ON"; ;;
     --root) root="$2"; shift ;;
-    *) echo "Unknown parameter passed: $1"; exit 1 ;;
+    *) echo "Unknown parameter passed: $1" ;;
   esac
   shift
 done

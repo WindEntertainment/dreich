@@ -10,7 +10,7 @@ while [[ "$#" -gt 0 ]]; do
   case $1 in
     --root) root="$2"; shift; ;;
     -w|--wasm) wasm=true; ;;
-    *) echo "Unknown parameter passed: $1"; exit; ;;
+    *) echo "Unknown parameter passed: $1" ;;
   esac
   shift
 done

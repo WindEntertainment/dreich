@@ -20,20 +20,18 @@ while [[ "$#" -gt 0 ]]; do
     -w|--wasm) wasm=true; flags="$flags -w"; ;;
     -t|--target) target="$2"; shift ;;
     --root) root="$2"; shift ;;
-    *) echo "Unknown parameter passed: $1"; exit 1 ;;
+    *) echo "Unknown parameter passed: $1" ;;
   esac
   shift
 done
 
+if [[ $skip_configure = false ]]; then
+  wm run cmake-configure --build-type "$build_type" "$flags"
+fi
+
 if [ $wasm = true ]; then
-  if [[ $skip_configure = false ]]; then
-    wm run cmake-configure --build-type "$build_type" "$flags" -w
-  fi
   emmake cmake --build "$root/build/web/build/$build_type" --parallel 10 --target "$target" --verbose
 else
-  if [[ $skip_configure = false ]]; then
-    wm run cmake-configure --build-type "$build_type" "$flags"
-  fi
   cmake --build "$root/build/app/build/$build_type" --parallel 10 --target "$target" --verbose
 fi
 

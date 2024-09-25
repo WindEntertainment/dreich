@@ -13,7 +13,7 @@ while [[ "$#" -gt 0 ]]; do
     -bt|--build-type) build_type="$2"; shift ;;
     -o|--output) output_folder="$2"; shift ;;
     --root) root="$2"; shift ;;
-    *) echo "Unknown parameter passed: $1"; exit 1 ;;
+    *) echo "Unknown parameter passed: $1" ;;
   esac
   shift
 done
