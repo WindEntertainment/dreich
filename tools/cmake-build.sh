@@ -17,7 +17,7 @@ while [[ "$#" -gt 0 ]]; do
     -bt|--build-type) build_type="$2"; shift ;;
     -wt|--with-testing) flags+=("-wt"); ;;
     -wd|--with-dotnet) flags+=("-wd"); ;;
-    -w|--wasm) wasm=true; flags+=(" -w"); ;;
+    -w|--wasm) wasm=true; flags+=("-w"); ;;
     -t|--target) target="$2"; shift ;;
     --root) root="$2"; shift ;;
     *) echo "Unknown parameter passed: $1" ;;
