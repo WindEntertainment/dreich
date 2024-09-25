@@ -6,4 +6,4 @@ runs:
   steps:
     - name: Lint
       shell: bash
-      run: dotnet format
+      run: dotnet format ${{env.projectRoot}}/Engine/Wind.csproj
