@@ -22,7 +22,7 @@ runs:
       with:
         run: |
           brew install p7zip llvm cmake conan emscripten --quiet
-          path: $(brew --prefix)
+        path: $(brew --prefix)
         cache: yes
         key: ${{ env.envHash }}-${{ env.os }}-brew
         sudo: false
