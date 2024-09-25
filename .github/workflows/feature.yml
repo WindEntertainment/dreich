@@ -28,7 +28,7 @@ jobs:
           - {
               name: 'Ubuntu',
               wasm: 'false',
-              projectRoot: '/home/runner/work/dreich',
+              projectRoot: '/home/runner/work/dreich/dreich',
               artifact: 'dreich-linux',
               os: 'ubuntu-latest',
               dotnetBuildType: 'build',
@@ -64,7 +64,7 @@ jobs:
           - {
               name: 'MacOS',
               wasm: 'false',
-              projectRoot: '/Users/runner/work/dreich',
+              projectRoot: '/Users/runner/work/dreich/dreich',
               artifact: 'dreich-macos',
               os: 'macos-14',
               dotnetBuildType: 'build',
@@ -115,7 +115,7 @@ jobs:
           - {
               name: 'Ubuntu',
               wasm: 'false',
-              projectRoot: '/home/runner/work/dreich',
+              projectRoot: '/home/runner/work/dreich/dreich',
               artifact: 'dreich-linux',
               os: 'ubuntu-latest',
               dotnetBuildType: 'build',
@@ -127,7 +127,7 @@ jobs:
           - {
               name: 'MacOS',
               wasm: 'false',
-              projectRoot: '/Users/runner/work/dreich',
+              projectRoot: '/Users/runner/work/dreich/dreich',
               artifact: 'dreich-macos',
               os: 'macos-14',
               dotnetBuildType: 'build',
@@ -174,7 +174,7 @@ jobs:
           - {
               wasm: 'true',
               name: 'Ubuntu',
-              projectRoot: '/home/runner/work/dreich',
+              projectRoot: '/home/runner/work/dreich/dreich',
               artifact: 'dreich-linux',
               os: 'ubuntu-latest',
               dotnetBuildType: 'build',
@@ -186,7 +186,7 @@ jobs:
           - {
               wasm: 'true',
               name: 'MacOS',
-              projectRoot: '/Users/runner/work/dreich',
+              projectRoot: '/Users/runner/work/dreich/dreich',
               artifact: 'dreich-macos',
               os: 'macos-14',
               dotnetBuildType: 'build',
