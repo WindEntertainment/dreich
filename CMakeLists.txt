@@ -72,7 +72,7 @@ find_package(SDL2 REQUIRED)
 # else()
 #   set(glad_DIR "./build/app/build/Debug/generators")
 # endif()
-find_package(glad CONFIG REQUIRED)
+find_package(glad REQUIRED)
 target_link_libraries(${PROJECT_NAME} PUBLIC glad::glad)
 
 find_package(OpenGL REQUIRED)
