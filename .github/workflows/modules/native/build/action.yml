@@ -23,4 +23,11 @@ runs:
         export CC=${{ env.cc }}
         export CXX=${{ env.cxx }}
 
+        emcc --clear-cache
+        emcc --rebuild-cache
+
+        mkdir -p ~/emscripten_cache
+        unset FROZEN_CACHE
+        export EM_CACHE=~/emscripten_cache
+
         sudo wm run cmake-build -bt ${{ env.conanBuildType }} -w
