@@ -67,6 +67,7 @@ if(BUILD_WASM)
 else()
   set(glad_DIR "./build/app/build/Debug/generators")
 endif()
+
 find_package(glad CONFIG REQUIRED)
 target_link_libraries(${PROJECT_NAME} PUBLIC glad::glad)
 
@@ -82,7 +83,7 @@ if(BUILD_WASM)
     add_custom_command(TARGET ${PROJECT_NAME}
       POST_BUILD
       COMMAND dotnet publish Wind.Web.csproj
-      WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/Engine
+      WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/engine
       COMMENT "Running dotnet publish"
     )
   endif()
@@ -94,7 +95,7 @@ else()
     add_custom_command(TARGET ${PROJECT_NAME}
       POST_BUILD
       COMMAND dotnet publish Wind.csproj
-      WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/Engine
+      WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/engine
       COMMENT "Running dotnet publish"
     )
   endif()
