@@ -21,7 +21,7 @@ done
 cd "$root" || exit
 
 if [ $wasm = true ]; then
-  conan install --output-folder build/web . -o *:shared=None --build=missing -s build_type="$build_type" --profile wasm
+  conan install --output-folder build/web . -o *:shared=False --build=missing -s build_type="$build_type" --profile wasm
 else
   conan install --output-folder build/app . --build=missing -s build_type="$build_type"
 fi
