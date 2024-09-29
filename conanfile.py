@@ -59,7 +59,7 @@ class MyConanFile(ConanFile):
   }
 
   default_options = {
-     "*:shared": True,
+    "*:shared": True,
     "fmt/*:header_only": True,
     "sdl/*:directx": False,
     "sdl/*:alsa": False,
