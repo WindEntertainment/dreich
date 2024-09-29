@@ -1,12 +1,17 @@
 set(CPACK_GENERATOR "ZIP")
-set(CPACK_PACKAGE_FILE_NAME "wind")
+
+if(BUILD_WASM)
+  set(CPACK_PACKAGE_FILE_NAME "wind-wasm")
+else()
+  set(CPACK_PACKAGE_FILE_NAME "wind")
+endif()
 
 install(TARGETS wind LIBRARY DESTINATION .)
 
 
 
 if(BUILD_WASM)
-  file(GLOB_RECURSE CONAN_FILES "conan-deploy/web/full_deploy/**/*.dylib")
+  file(GLOB_RECURSE CONAN_FILES "conan-deploy/web/full_deploy/**/*.a")
   foreach(conan_file ${CONAN_FILES})
     message(${conan_file})
     install(FILES ${conan_file} DESTINATION .)

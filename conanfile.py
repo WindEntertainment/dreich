@@ -18,6 +18,8 @@ class MyConanFile(ConanFile):
   ]
 
   options = {
+    "*:shared": [None, True, False],
+    "boost/*:header_only": [None, True, False],
     "boost/*:header_only": [None, True, False],
     "boost/*:without_charconv": [None, True, False],
     "boost/*:without_container": [None, True, False],
@@ -57,6 +59,7 @@ class MyConanFile(ConanFile):
   }
 
   default_options = {
+     "*:shared": True,
     "fmt/*:header_only": True,
     "sdl/*:directx": False,
     "sdl/*:alsa": False,
