@@ -1,5 +1,5 @@
 #include <SDL2/SDL.h>
-#include <SDL_error.h>
+#include <SDL2/SDL_error.h>
 #include <glad/glad.h>
 
 #include "logger.hpp"
@@ -19,11 +19,6 @@ bool windInitRenderer() {
   SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 3);
   SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 3);
   SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
-
-  if (!gladLoadGLLoader((GLADloadproc)SDL_GL_GetProcAddress)) {
-    Logger::Logger::native.error("Failed to load GLLoader (GLAD)");
-    return false;
-  }
 
   return true;
 }
@@ -55,4 +50,13 @@ void* windCreateWindow(int position_x, int position_y, int width, int height, ch
   }
 
   return window;
+}
+
+bool windPostInitRenderer() {
+  if (!gladLoadGLLoader((GLADloadproc)SDL_GL_GetProcAddress)) {
+    Logger::Logger::native.error("Failed to load GLLoader (GLAD)");
+    return false;
+  }
+
+  return true;
 }

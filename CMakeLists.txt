@@ -60,18 +60,14 @@ find_package(fmt CONFIG REQUIRED)
 target_link_libraries(${PROJECT_NAME} PUBLIC fmt::fmt-header-only)
 
 find_package(SDL2 REQUIRED)
-# if(APPLE)
-  target_link_libraries(${PROJECT_NAME} PUBLIC SDL2::SDL2)
-# else()
-#   target_link_libraries(${PROJECT_NAME} PUBLIC SDL2::SDL2main SDL2::SDL2)
-# endif()
-
+target_link_libraries(${PROJECT_NAME} PUBLIC SDL2::SDL2)
 
 if(BUILD_WASM)
   set(glad_DIR "./build/web/build/Debug/generators")
 else()
   set(glad_DIR "./build/app/build/Debug/generators")
 endif()
+
 find_package(glad CONFIG REQUIRED)
 target_link_libraries(${PROJECT_NAME} PUBLIC glad::glad)
 
@@ -87,7 +83,7 @@ if(BUILD_WASM)
     add_custom_command(TARGET ${PROJECT_NAME}
       POST_BUILD
       COMMAND dotnet publish Wind.Web.csproj
-      WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/Engine
+      WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/engine
       COMMENT "Running dotnet publish"
     )
   endif()
@@ -99,7 +95,7 @@ else()
     add_custom_command(TARGET ${PROJECT_NAME}
       POST_BUILD
       COMMAND dotnet publish Wind.csproj
-      WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/Engine
+      WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/engine
       COMMENT "Running dotnet publish"
     )
   endif()

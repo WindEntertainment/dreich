@@ -2,7 +2,7 @@ name: Setup conan
 description: Setup conan
 
 runs:
-  using: 'composite'
+  using: "composite"
   steps:
     - name: Install conan
       if: env.os != 'macos-14'
