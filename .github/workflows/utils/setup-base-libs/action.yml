@@ -39,6 +39,7 @@ runs:
 
     - name: Install Emscripten SDK (Linux and macOS)
       if: matrix.os != 'windows-latest'
+      shell: bash
       run: |
         git clone https://github.com/emscripten-core/emsdk.git
         cd emsdk
@@ -48,6 +49,7 @@ runs:
 
     - name: Install Emscripten SDK (Windows)
       if: matrix.os == 'windows-latest'
+      shell: bash
       run: |
         git clone https://github.com/emscripten-core/emsdk.git
         cd emsdk
