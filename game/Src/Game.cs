@@ -1,5 +1,28 @@
 using System.Runtime.InteropServices;
+using Wind;
 using Wind.Math;
+
+enum EventType {
+  NONE,
+
+  MOUSE_MOTION,
+  MOUSE_BUTTON_DOWN,
+  MOUSE_BUTTON_UP,
+
+  KEY_DOWN,
+  KEY_UP,
+
+  QUIT
+};
+
+struct WindEvent {
+  public EventType type;
+
+  public double x;
+  public double y;
+
+  public InputSystem.Keycode keycode;
+};
 
 internal class Game {
   [DllImport("wind.so", EntryPoint = "windInitRenderer", CallingConvention = CallingConvention.Cdecl)]
@@ -11,6 +34,9 @@ internal class Game {
   [DllImport("wind.so", EntryPoint = "windPostInitRenderer", CallingConvention = CallingConvention.Cdecl)]
   public static extern bool WindPostInitRenderer();
 
+  [DllImport("wind.so", EntryPoint = "windPollEvent", CallingConvention = CallingConvention.Cdecl)]
+  public static extern WindEvent WindPollEvent();
+
   public static void Main(string[] args) {
     if (!WindInitRenderer())
       return;
@@ -20,7 +46,21 @@ internal class Game {
     if (!WindPostInitRenderer())
       return;
 
-    Task.Delay(1000).Wait();
+
+    Console.WriteLine("Begin");
+
+    bool running = true;
+    while (running) {
+      var _event = WindPollEvent();
+      switch (_event.type) {
+        case EventType.QUIT:
+          running = false;
+          break;
+      }
+    }
+
+    Console.WriteLine("End");
+
     // WindEngine engine = new();
     // var assetDatabase = WindServices.Get<AssetDatabase>();
     // assetDatabase.LoadBundle("Data/Main");
