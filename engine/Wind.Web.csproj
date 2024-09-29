@@ -4,12 +4,11 @@
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <ImplicitUsings>enable</ImplicitUsings>
     <OutputPath>bin\$(Configuration)\web\</OutputPath>
-    <OutputType>Exe</OutputType>
+    <OutputType>Library</OutputType>
     <WasmEnableExperimentalFeatures>true</WasmEnableExperimentalFeatures>
     <RootNamespace>wind</RootNamespace>
     <Nullable>enable</Nullable>
     <PublishTrimmed>true</PublishTrimmed>
-    <TrimMode>full</TrimMode>
     <RunAOTCompilation>true</RunAOTCompilation>
     <DefineConstants>$(DefineConstants);web</DefineConstants>
   </PropertyGroup>

@@ -60,12 +60,7 @@ find_package(fmt CONFIG REQUIRED)
 target_link_libraries(${PROJECT_NAME} PUBLIC fmt::fmt-header-only)
 
 find_package(SDL2 REQUIRED)
-# if(APPLE)
-  target_link_libraries(${PROJECT_NAME} PUBLIC SDL2::SDL2)
-# else()
-#   target_link_libraries(${PROJECT_NAME} PUBLIC SDL2::SDL2main SDL2::SDL2)
-# endif()
-
+target_link_libraries(${PROJECT_NAME} PUBLIC SDL2::SDL2)
 
 if(BUILD_WASM)
   set(glad_DIR "./build/web/build/Debug/generators")
