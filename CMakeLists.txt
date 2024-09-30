@@ -103,9 +103,9 @@ endif()
 
 ###===================================================================================##
 
-add_executable(${PROJECT_NAME}-exe ${HEADERS} ${SOURCES} ./native/src/main.cpp)
-target_include_directories(${PROJECT_NAME}-exe PRIVATE ./native/include/)
-target_link_libraries(${PROJECT_NAME}-exe PUBLIC ${PROJECT_NAME})
+add_executable(${PROJECT_NAME} ${HEADERS} ${SOURCES} ./native/src/main.cpp)
+target_include_directories(${PROJECT_NAME} PRIVATE ./native/include/)
+target_link_libraries(${PROJECT_NAME} PUBLIC ${PROJECT_NAME})
 
 ###===================================================================================##
 
