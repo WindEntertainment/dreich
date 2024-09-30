@@ -24,7 +24,7 @@ done
 cd "$root" || exit
 
 if [ $wasm = true ]; then
-  cmake -DCMAKE_CXX_FLAGS="--cache $root/emcc-cache" -G "Unix Makefiles" -DCMAKE_POLICY_DEFAULT_CMP0091=NEW -DCMAKE_BUILD_TYPE="$build_type" -DCMAKE_TOOLCHAIN_FILE="$root/build/web/build/$build_type/generators/conan_toolchain.cmake" -S"$root" -B"$root/build/web/build/$build_type" "${flags[@]}"
+  cmake -G "Unix Makefiles" -DCMAKE_POLICY_DEFAULT_CMP0091=NEW -DCMAKE_BUILD_TYPE="$build_type" -DCMAKE_TOOLCHAIN_FILE="$root/build/web/build/$build_type/generators/conan_toolchain.cmake" -S"$root" -B"$root/build/web/build/$build_type" "${flags[@]}"
 else
   cmake -G "Unix Makefiles" -DCMAKE_POLICY_DEFAULT_CMP0091=NEW -DCMAKE_BUILD_TYPE="$build_type" -DCMAKE_TOOLCHAIN_FILE="$root/build/app/build/$build_type/generators/conan_toolchain.cmake" -S"$root" -B"$root/build/app/build/$build_type" "${flags[@]}"
 fi
