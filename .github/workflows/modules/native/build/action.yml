@@ -20,6 +20,7 @@ runs:
       if: env.wasm == 'true'
       shell: bash
       run: |
+        unset FROZEN_CACHE
         export CC=${{ env.cc }}
         export CXX=${{ env.cxx }}
 
