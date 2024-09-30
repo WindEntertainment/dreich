@@ -45,7 +45,9 @@ runs:
         cd emsdk
         ./emsdk install latest
         ./emsdk activate latest
-        source ./emsdk_env.sh
+        source "/home/runner/work/dreich/dreich/emsdk/emsdk_env.sh"
+        echo 'source "/home/runner/work/dreich/dreich/emsdk/emsdk_env.sh"' >> $HOME/.bash_profile
+        emmake -v
 
     - name: Setup wm
       shell: bash
