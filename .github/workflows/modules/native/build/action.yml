@@ -23,4 +23,4 @@ runs:
         export CC=${{ env.cc }}
         export CXX=${{ env.cxx }}
 
-        sudo wm run cmake-build -bt ${{ env.conanBuildType }} -w
+        wm run cmake-build -bt ${{ env.conanBuildType }} -w
