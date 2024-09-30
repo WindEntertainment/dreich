@@ -21,7 +21,7 @@ runs:
       if: env.os == 'macos-14'
       with:
         run: |
-          brew install p7zip llvm cmake conan --quiet
+          brew install p7zip llvm cmake conan emscripten --quiet
         path: $(brew --prefix)
         cache: yes
         key: ${{ env.envHash }}-${{ env.os }}-brew
@@ -35,10 +35,10 @@ runs:
       if: env.os == 'windows-latest'
       shell: powershell
       run: |
-        choco install make cmake 7zip yq llvm --quiet
+        choco install make cmake 7zip yq llvm emscripten --quiet
 
     - name: Install Emscripten SDK (Linux and macOS)
-      if: matrix.os != 'windows-latest'
+      if: matrix.os == 'ubuntu-latest'
       shell: bash
       run: |
         git clone https://github.com/emscripten-core/emsdk.git
@@ -46,16 +46,6 @@ runs:
         ./emsdk install latest
         ./emsdk activate latest
         source ./emsdk_env.sh
-
-    - name: Install Emscripten SDK (Windows)
-      if: matrix.os == 'windows-latest'
-      shell: bash
-      run: |
-        git clone https://github.com/emscripten-core/emsdk.git
-        cd emsdk
-        emsdk install latest
-        emsdk activate latest
-        ./emsdk_env.bat
 
     - name: Setup wm
       shell: bash
