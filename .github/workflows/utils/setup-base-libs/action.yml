@@ -37,6 +37,12 @@ runs:
       run: |
         choco install make cmake 7zip yq llvm emscripten --quiet
 
+    - name: Install Emscripten SDK (Linux and macOS)
+      if: matrix.os == 'ubuntu-latest'
+      shell: bash
+      run: |
+        sudo chmod -R 777 /usr/share/emscripten/cache
+
     - name: Setup wm
       shell: bash
       run: |
