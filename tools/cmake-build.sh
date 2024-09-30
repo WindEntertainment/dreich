@@ -30,7 +30,6 @@ if [[ $skip_configure = false ]]; then
 fi
 
 if [ $wasm = true ]; then
-  unset FROZEN_CACHE
   emmake cmake --build "$root/build/web/build/$build_type" --parallel 10 --target "$target" --verbose
 else
   cmake --build "$root/build/app/build/$build_type" --parallel 10 --target "$target" --verbose
