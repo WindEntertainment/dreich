@@ -7,23 +7,23 @@ output_folder=releases
 
 call_dir=$(pwd)
 root=""
+wasm=false
 
 while [[ "$#" -gt 0 ]]; do
   case $1 in
     -bt|--build-type) build_type="$2"; shift ;;
     -o|--output) output_folder="$2"; shift ;;
+    -w|--wasm) wasm=true; ;;
     --root) root="$2"; shift ;;
     *) echo "Unknown parameter passed: $1" ;;
   esac
   shift
 done
 
-cd "$root/build/$build_type" || exit
-
-if [ "$OS" != "Windows" ]; then
-  if [[ $clear_output_folder ]]; then
-    sudo rm -rf "$output_folder" || echo ""
-  fi
+if [ $wasm = true ]; then
+  cd "$root/build/web/build/$build_type" || exit
+else
+  cd "$root/build/app/build/$build_type" || exit
 fi
 
 cpack -B "$root/$output_folder"
