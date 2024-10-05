@@ -1,7 +1,7 @@
 {
   "files.exclude": {
     "obj": true,
-    ".cache": true,
+    ".cache": true
   },
   "dotnet.defaultSolution": "wind-csharp.sln",
   "cSpell.words": [
@@ -14,5 +14,5 @@
     "scancode",
     "WINDOWPOS"
   ],
-  "cmake.sourceDirectory": "/home/neutrinozh/Dev/charp-test"
+  "cmake.sourceDirectory": "C:/Users/biba_/Desktop/p/csharp"
 }

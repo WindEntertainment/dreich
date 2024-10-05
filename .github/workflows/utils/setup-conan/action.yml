@@ -2,7 +2,7 @@ name: Setup conan
 description: Setup conan
 
 runs:
-  using: "composite"
+  using: 'composite'
   steps:
     - name: Install conan
       if: env.os != 'macos-14'
@@ -40,14 +40,14 @@ runs:
             build_type=${{ env.conanBuildType }}
             compiler=clang
             compiler.cppstd=gnu23
-            compiler.version=17
+            compiler.runtime=dynamic
+            compiler.runtime_type=Release
+            compiler.runtime_version=v144
+            compiler.version=18
             os=Windows
             [conf]
             tools.system.package_manager:mode=install
-            tools.cmake.cmaketoolchain:generator=Unix Makefiles
-            [buildenv]
-            CC=clang-cl.exe
-            CXX=clang-cl.exe
+            tools.system.package_manager:sudo=True
           " > C:\\Users\\runneradmin\\.conan2\\profiles\\default
         elif [ "$RUNNER_OS" == "macOS" ]; then
           echo "
