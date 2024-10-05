@@ -10,12 +10,13 @@ class MyConanFile(ConanFile):
   settings = "os", "compiler", "build_type", "arch"
   generators = "CMakeDeps", "CMakeToolchain"
   exports_sources = "*"
-  requires = [
-    "boost/1.85.0",
-    "sdl/2.30.7",
-    "fmt/11.0.2",
-    "glad/0.1.36",
-  ]
+
+  def requirements(self):
+    if self.settings.os != "Windows":
+      self.requires("boost/1.85.0")
+    self.requires("sdl/2.30.7")
+    self.requires("fmt/11.0.2")
+    self.requires("glad/0.1.36")
 
   options = {
     # "*:shared": [None, True, False],
