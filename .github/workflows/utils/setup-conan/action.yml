@@ -24,7 +24,7 @@ runs:
             arch=x86_64
             build_type=${{ env.conanBuildType }}
             compiler=clang
-            compiler.cppstd=20
+            compiler.cppstd=gnu23
             compiler.libcxx=libc++
             compiler.version=14
             os=Linux
@@ -47,7 +47,6 @@ runs:
             os=Windows
             [conf]
             tools.system.package_manager:mode=install
-            tools.system.package_manager:sudo=True
           " > C:\\Users\\runneradmin\\.conan2\\profiles\\default
         elif [ "$RUNNER_OS" == "macOS" ]; then
           echo "
