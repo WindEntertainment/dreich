@@ -10,15 +10,16 @@ class MyConanFile(ConanFile):
   settings = "os", "compiler", "build_type", "arch"
   generators = "CMakeDeps", "CMakeToolchain"
   exports_sources = "*"
-  requires = [
-    "boost/1.85.0",
-    "sdl/2.30.7",
-    "fmt/11.0.2",
-    "glad/0.1.36",
-  ]
+
+  def requirements(self):
+    if self.settings.os != "Windows":
+      self.requires("boost/1.85.0")
+    self.requires("sdl/2.30.7")
+    self.requires("fmt/11.0.2")
+    self.requires("glad/0.1.36")
 
   options = {
-    "*:shared": [None, True, False],
+    # "*:shared": [None, True, False],
     "boost/*:header_only": [None, True, False],
     "boost/*:header_only": [None, True, False],
     "boost/*:without_charconv": [None, True, False],
@@ -59,7 +60,12 @@ class MyConanFile(ConanFile):
   }
 
   default_options = {
-    "*:shared": True,
+    # "*:shared": True,
+    # "boost/*:shared": False,
+    # "sdl/*:shared": True,
+    # "fmt/*:shared": True,
+    # "glad/*:shared": True,
+
     "fmt/*:header_only": True,
     "sdl/*:directx": False,
     "sdl/*:alsa": False,
