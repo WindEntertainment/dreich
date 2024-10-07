@@ -8,5 +8,3 @@ if(BUILD_DOTNET)
 endif()
 
 ###===================================================================================##
-
-include(${CMAKE_SOURCE_DIR}/cmake/windows/cpack.cmake)

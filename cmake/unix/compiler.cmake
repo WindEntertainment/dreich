@@ -14,5 +14,3 @@ if(BUILD_DOTNET)
 endif()
 
 ###===================================================================================##
-
-include(${CMAKE_SOURCE_DIR}/cmake/unix/cpack.cmake)
