@@ -33,8 +33,6 @@ jobs:
               os: 'ubuntu-latest',
               dotnetBuildType: 'build',
               conanBuildType: 'Debug',
-              cc: 'clang',
-              cxx: 'clang++',
               isRelease: false,
             }
     steps:
@@ -69,8 +67,6 @@ jobs:
               os: 'macos-14',
               dotnetBuildType: 'build',
               conanBuildType: 'Debug',
-              cc: 'clang',
-              cxx: 'clang++',
               isRelease: false,
             }
     steps:
@@ -87,8 +83,6 @@ jobs:
       - name: Ctest
         shell: bash
         run: |
-          export CC=${{ env.cc }}
-          export CXX=${{ env.cxx }}
           wm run ctest
       - name: Engine
         uses: './.github/workflows/modules/engine/test'
@@ -108,8 +102,6 @@ jobs:
               os: 'windows-latest',
               dotnetBuildType: 'build',
               conanBuildType: 'Debug',
-              cc: 'clang',
-              cxx: 'clang++',
               isRelease: false,
             }
           - {
@@ -120,8 +112,6 @@ jobs:
               os: 'ubuntu-latest',
               dotnetBuildType: 'build',
               conanBuildType: 'Debug',
-              cc: 'clang',
-              cxx: 'clang++',
               isRelease: false,
             }
           - {
@@ -132,8 +122,6 @@ jobs:
               os: 'macos-14',
               dotnetBuildType: 'build',
               conanBuildType: 'Debug',
-              cc: 'clang',
-              cxx: 'clang++',
               isRelease: false,
             }
     steps:
@@ -167,8 +155,6 @@ jobs:
               os: 'windows-latest',
               dotnetBuildType: 'build',
               conanBuildType: 'Debug',
-              cc: 'emcc',
-              cxx: 'em++',
               isRelease: false,
             }
           - {
@@ -179,8 +165,6 @@ jobs:
               os: 'ubuntu-latest',
               dotnetBuildType: 'build',
               conanBuildType: 'Debug',
-              cc: 'emcc',
-              cxx: 'em++',
               isRelease: false,
             }
           - {
@@ -191,8 +175,6 @@ jobs:
               os: 'macos-14',
               dotnetBuildType: 'build',
               conanBuildType: 'Debug',
-              cc: 'emcc',
-              cxx: 'em++',
               isRelease: false,
             }
     steps:

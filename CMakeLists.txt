@@ -13,11 +13,19 @@ list(APPEND CMAKE_PREFIX_PATH "${CMAKE_BINARY_DIR}")
 set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+
 if(BUILD_WASM)
-  set(CMAKE_C_COMPILER "emcc")
-  set(CMAKE_CXX_COMPILER "em++")
+  message(STATUS "Building for WebAssembly")
+  include(${CMAKE_SOURCE_DIR}/cmake/wasm/CMakeLists.txt)
+else()
+  if (WIN32)
+    message(STATUS "Configuring for Windows")
+    include(${CMAKE_SOURCE_DIR}/cmake/windows/CMakeLists.txt)
+  else()
+    message(STATUS "Configuring for macOS/Linux")
+    include(${CMAKE_SOURCE_DIR}/cmake/unix/CMakeLists.txt)
+  endif()
 endif()
-add_compile_options(-fms-extensions)
 
 ###===================================================================================##
 
@@ -59,7 +67,7 @@ target_include_directories(${PROJECT_NAME} PRIVATE ./native/include/)
 find_package(fmt CONFIG REQUIRED)
 target_link_libraries(${PROJECT_NAME} PUBLIC fmt::fmt-header-only)
 
-find_package(SDL2 REQUIRED)
+find_package(SDL2 CONFIG REQUIRED)
 target_link_libraries(${PROJECT_NAME} PUBLIC SDL2::SDL2)
 
 if(BUILD_WASM)
@@ -78,35 +86,6 @@ target_include_directories(${PROJECT_NAME} PUBLIC ${OPENGL_INCLUDE_DIR})
 
 ###===================================================================================##
 
-if(BUILD_WASM)
-  if(BUILD_DOTNET)
-    add_custom_command(TARGET ${PROJECT_NAME}
-      POST_BUILD
-      COMMAND dotnet publish Wind.Web.csproj
-      WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/engine
-      COMMENT "Running dotnet publish"
-    )
-  endif()
-  set_target_properties(${PROJECT_NAME} PROPERTIES
-    LINK_FLAGS "-s WASM=1 -s EXPORTED_FUNCTIONS='[\"_main\"]'"
-  )
-else()
-  if(BUILD_DOTNET)
-    add_custom_command(TARGET ${PROJECT_NAME}
-      POST_BUILD
-      COMMAND dotnet publish Wind.csproj
-      WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/engine
-      COMMENT "Running dotnet publish"
-    )
-  endif()
-endif()
-
-###===================================================================================##
-
 add_executable(${PROJECT_NAME}-engine ${HEADERS} ${SOURCES} ./native/src/main.cpp)
 target_include_directories(${PROJECT_NAME}-engine PRIVATE ./native/include/)
 target_link_libraries(${PROJECT_NAME}-engine PUBLIC ${PROJECT_NAME})
-
-###===================================================================================##
-
-include(cpack/cpack.cmake)

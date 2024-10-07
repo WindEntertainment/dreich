@@ -32,7 +32,11 @@ fi
 if [ $wasm = true ]; then
   emmake cmake --build "$root/build/web/build/$build_type" --parallel 10 --target "$target" --verbose
 else
-  cmake --build "$root/build/app/build/$build_type" --parallel 10 --target "$target" --verbose
+  if [[ "$OSTYPE" == "msys" ]] || [[ "$OSTYPE" == "win32" ]]; then
+    cmake --build "$root/build/app/build/$build_type" --config Release --parallel 10 --target "$target" --verbose
+  else
+    cmake --build "$root/build/app/build/$build_type" --parallel 10 --target "$target" --verbose
+  fi
 fi
 
 
