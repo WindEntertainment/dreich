@@ -10,14 +10,9 @@ runs:
       with:
         version: 2.1.0
 
-    - name: Create default profile
-      shell: bash
-      run: |
-        conan profile detect --force
-        conan profile detect --force --name wasm
-
     - name: Config profile
       run: |
+        conan profile detect --force
         if [ "$RUNNER_OS" == "Linux" ]; then
           echo "
             [settings]
@@ -36,15 +31,14 @@ runs:
         elif [ "$RUNNER_OS" == "Windows" ]; then
           echo "
             [settings]
-            arch=x86_64
-            build_type=${{ env.conanBuildType }}
-            compiler=clang
-            compiler.cppstd=gnu23
-            compiler.runtime=dynamic
-            compiler.runtime_type=Release
-            compiler.runtime_version=v144
-            compiler.version=18
             os=Windows
+            arch=x86_64
+            compiler=msvc
+            compiler.version=193
+            compiler.runtime=dynamic
+            build_type=${{ env.conanBuildType }}
+            [tool_requires]
+            emsdk/3.1.44
             [conf]
             tools.system.package_manager:mode=install
           " > C:\\Users\\runneradmin\\.conan2\\profiles\\default
@@ -70,7 +64,9 @@ runs:
       shell: bash
 
     - name: Config wasm profile
+      if: env.wasm == 'true'
       run: |
+        conan profile detect --force --name wasm
         if [ "$RUNNER_OS" == "Linux" ]; then
           echo "
             [settings]
@@ -91,12 +87,12 @@ runs:
         elif [ "$RUNNER_OS" == "Windows" ]; then
           echo "
             [settings]
-            os=Windows
-            arch=x86_64
+            arch=wasm
+            build_type=${{ env.conanBuildType }}
             compiler=msvc
             compiler.version=193
             compiler.runtime=dynamic
-            build_type=${{ env.conanBuildType }}
+            os=Emscripten
             [tool_requires]
             emsdk/3.1.44
             [conf]
