@@ -32,10 +32,14 @@ runs:
       if: env.wasm == 'false'
       shell: bash
       run: |
+        export CC=${{ env.cc }}
+        export CXX=${{ env.cxx }}
         wm run conan-install -bt ${{ env.conanBuildType }}
 
     - name: Install dependencies
       if: env.wasm == 'true'
       shell: bash
       run: |
+        export CC=${{ env.cc }}
+        export CXX=${{ env.cxx }}
         wm run conan-install -bt ${{ env.conanBuildType }} -w
