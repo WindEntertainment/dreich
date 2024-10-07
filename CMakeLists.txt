@@ -5,6 +5,9 @@ project(wind)
 message("Building with CMake version: ${CMAKE_VERSION}")
 message("WASM: ${BUILD_WASM}")
 message(".Net: ${BUILD_DOTNET}")
+include(${CMAKE_SOURCE_DIR}/cmake/CMakeUtils.cmake)
+
+include_os(compiler)
 
 ###===================================================================================##
 
@@ -13,19 +16,6 @@ list(APPEND CMAKE_PREFIX_PATH "${CMAKE_BINARY_DIR}")
 set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
-
-if(BUILD_WASM)
-  message(STATUS "Building for WebAssembly")
-  include(${CMAKE_SOURCE_DIR}/cmake/wasm/CMakeLists.txt)
-else()
-  if (WIN32)
-    message(STATUS "Configuring for Windows")
-    include(${CMAKE_SOURCE_DIR}/cmake/windows/CMakeLists.txt)
-  else()
-    message(STATUS "Configuring for macOS/Linux")
-    include(${CMAKE_SOURCE_DIR}/cmake/unix/CMakeLists.txt)
-  endif()
-endif()
 
 ###===================================================================================##
 
@@ -89,3 +79,5 @@ target_include_directories(${PROJECT_NAME} PUBLIC ${OPENGL_INCLUDE_DIR})
 add_executable(${PROJECT_NAME}-engine ${HEADERS} ${SOURCES} ./native/src/main.cpp)
 target_include_directories(${PROJECT_NAME}-engine PRIVATE ./native/include/)
 target_link_libraries(${PROJECT_NAME}-engine PUBLIC ${PROJECT_NAME})
+
+include_os(cpack)

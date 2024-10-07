@@ -12,6 +12,7 @@ runs:
 
     - name: Config profiles
       run: |
+        conan profile detect --force --name wasm
         if [ "$RUNNER_OS" == "Linux" ]; then
           cp conan/profiles/linux/* /home/runner/.conan2/profiles
         elif [ "$RUNNER_OS" == "Windows" ]; then

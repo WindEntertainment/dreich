@@ -1,6 +1,5 @@
-
-  set(CMAKE_C_COMPILER "emcc")
-  set(CMAKE_CXX_COMPILER "em++")
+set(CMAKE_C_COMPILER "emcc")
+set(CMAKE_CXX_COMPILER "em++")
 
 ###===================================================================================##
 
@@ -18,5 +17,3 @@ set_target_properties(${PROJECT_NAME} PROPERTIES
 )
 
 ###===================================================================================##
-
-include(${CMAKE_SOURCE_DIR}/cmake/wasm/cpack.cmake)
