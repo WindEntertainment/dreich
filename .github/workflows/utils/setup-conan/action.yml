@@ -10,115 +10,14 @@ runs:
       with:
         version: 2.1.0
 
-    - name: Create default profile
-      shell: bash
-      run: |
-        conan profile detect --force
-        conan profile detect --force --name wasm
-
-    - name: Config profile
+    - name: Config profiles
       run: |
         if [ "$RUNNER_OS" == "Linux" ]; then
-          echo "
-            [settings]
-            arch=x86_64
-            build_type=${{ env.conanBuildType }}
-            compiler=clang
-            compiler.cppstd=gnu23
-            compiler.libcxx=libc++
-            compiler.version=14
-            os=Linux
-            [conf]
-            tools.system.package_manager:mode=install
-            tools.system.package_manager:sudo=True
-            tools.cmake.cmaketoolchain:generator=Unix Makefiles
-          " > /home/runner/.conan2/profiles/default
+          cp conan/profiles/linux/* /home/runner/.conan2/profiles
         elif [ "$RUNNER_OS" == "Windows" ]; then
-          echo "
-            [settings]
-            arch=x86_64
-            build_type=${{ env.conanBuildType }}
-            compiler=clang
-            compiler.cppstd=gnu23
-            compiler.runtime=dynamic
-            compiler.runtime_type=Release
-            compiler.runtime_version=v144
-            compiler.version=18
-            os=Windows
-            [conf]
-            tools.system.package_manager:mode=install
-          " > C:\\Users\\runneradmin\\.conan2\\profiles\\default
+          cp conan/profiles/windows/* C:\\Users\\runneradmin\\.conan2\\profiles
         elif [ "$RUNNER_OS" == "macOS" ]; then
-          echo "
-            [settings]
-            arch=armv8
-            build_type=${{ env.conanBuildType }}
-            compiler=apple-clang
-            compiler.cppstd=gnu23
-            compiler.libcxx=libc++
-            compiler.version=15
-            os=Macos
-            [conf]
-            tools.system.package_manager:mode=install
-            tools.system.package_manager:sudo=True
-            tools.cmake.cmaketoolchain:generator=Unix Makefiles
-          " > /Users/runner/.conan2/profiles/default
-        else
-          echo "$RUNNER_OS not supported"
-          exit 1
-        fi
-      shell: bash
-
-    - name: Config wasm profile
-      run: |
-        if [ "$RUNNER_OS" == "Linux" ]; then
-          echo "
-            [settings]
-            arch=wasm
-            compiler=clang
-            build_type=${{ env.conanBuildType }}
-            compiler.cppstd=gnu23
-            compiler.libcxx=libc++
-            compiler.version=15
-            os=Emscripten
-            [tool_requires]
-            emsdk/3.1.44
-            [conf]
-            tools.system.package_manager:mode=install
-            tools.system.package_manager:sudo=True
-            tools.cmake.cmaketoolchain:generator=Unix Makefiles
-          " > /home/runner/.conan2/profiles/wasm
-        elif [ "$RUNNER_OS" == "Windows" ]; then
-          echo "
-            [settings]
-            os=Windows
-            arch=x86_64
-            compiler=msvc
-            compiler.version=193
-            compiler.runtime=dynamic
-            build_type=${{ env.conanBuildType }}
-            [tool_requires]
-            emsdk/3.1.44
-            [conf]
-            tools.system.package_manager:mode=install
-          " > C:\\Users\\runneradmin\\.conan2\\profiles\\wasm
-        elif [ "$RUNNER_OS" == "macOS" ]; then
-          echo "
-            [settings]
-            arch=wasm
-            compiler=clang
-            build_type=${{ env.conanBuildType }}
-            compiler.cppstd=gnu23
-            compiler.libcxx=libc++
-            compiler.version=15
-            os=Emscripten
-            [tool_requires]
-            emsdk/3.1.44
-            [conf]
-            tools.system.package_manager:mode=install
-            tools.system.package_manager:sudo=True
-            tools.cmake.cmaketoolchain:generator=Unix Makefiles
-          " > /Users/runner/.conan2/profiles/wasm
+          cp conan/profiles/macos/* /Users/runner/.conan2/profiles
         else
           echo "$RUNNER_OS not supported"
           exit 1
