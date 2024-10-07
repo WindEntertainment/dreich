@@ -17,26 +17,16 @@ if(BUILD_WASM)
     install(FILES ${conan_file} DESTINATION .)
   endforeach()
 
-  file(GLOB_RECURSE CSHARP_WASM_FILES "engine/bin/Release/web/*/publish/*.wasm")
-  file(GLOB_RECURSE CSHARP_HTML_FILES "engine/bin/Release/web/*/publish/*.html")
-  file(GLOB_RECURSE CSHARP_JS_FILES "engine/bin/Release/web/*/publish/*.js")
-  file(GLOB_RECURSE CSHARP_CSS_FILES "engine/bin/Release/web/*/publish/*.css")
-  foreach(csharp_file ${CSHARP_WASM_FILES})
-    message(${csharp_file})
-    install(FILES ${csharp_file} DESTINATION .)
-  endforeach()
-  foreach(csharp_file ${CSHARP_HTML_FILES})
-    message(${csharp_file})
-    install(FILES ${csharp_file} DESTINATION .)
-  endforeach()
-  foreach(csharp_file ${CSHARP_JS_FILES})
-    message(${csharp_file})
-    install(FILES ${csharp_file} DESTINATION .)
-  endforeach()
-  foreach(csharp_file ${CSHARP_CSS_FILES})
-    message(${csharp_file})
-    install(FILES ${csharp_file} DESTINATION .)
-  endforeach()
+  install(
+    DIRECTORY "engine/bin/Release/web/net8.0/publish"
+    DESTINATION .
+    FILES_MATCHING
+      PATTERN "*.wasm"
+      PATTERN "*.html"
+      PATTERN "*.js"
+      PATTERN "*.css"
+      PATTERN "*.json"
+  )
 else()
   file(GLOB_RECURSE CONAN_FILES "conan-deploy/app/full_deploy/host/**/*.dylib")
   foreach(conan_file ${CONAN_FILES})
