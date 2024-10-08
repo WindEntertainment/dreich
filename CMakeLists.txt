@@ -20,7 +20,6 @@ list(APPEND CMAKE_PREFIX_PATH "${CMAKE_BINARY_DIR}")
 set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
-import(compiler ON)
 
 ###===================================================================================##
 
@@ -39,6 +38,8 @@ if (OUTPUT_TYPE STREQUAL "executable")
 else()
   import(library OFF)
 endif()
+
+import(compiler ON)
 
 ###===================================================================================##
 
