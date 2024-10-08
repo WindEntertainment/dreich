@@ -7,6 +7,10 @@ message("WASM: ${BUILD_WASM}")
 message("Output type: ${OUTPUT_TYPE}")
 message(".Net: ${BUILD_DOTNET}")
 
+if (BUILD_WASM)
+  set(OUTPUT_TYPE "executable")
+endif()
+
 include(${CMAKE_SOURCE_DIR}/cmake/utils.cmake)
 
 ###===================================================================================##
