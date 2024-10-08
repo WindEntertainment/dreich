@@ -4,10 +4,10 @@ project(wind)
 
 message("Building with CMake version: ${CMAKE_VERSION}")
 message("WASM: ${BUILD_WASM}")
+message("Output type: ${OUTPUT_TYPE}")
 message(".Net: ${BUILD_DOTNET}")
-include(${CMAKE_SOURCE_DIR}/cmake/CMakeUtils.cmake)
 
-include_os(compiler)
+include(${CMAKE_SOURCE_DIR}/cmake/utils.cmake)
 
 ###===================================================================================##
 
@@ -16,68 +16,28 @@ list(APPEND CMAKE_PREFIX_PATH "${CMAKE_BINARY_DIR}")
 set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
-
-###===================================================================================##
-
-if(ENABLE_TESTS AND CMAKE_BUILD_TYPE STREQUAL "Debug")
-  message("Testing enabled")
-
-  enable_testing()
-  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} --coverage -fprofile-arcs -ftest-coverage")
-
-  add_custom_target(coverage
-    COMMAND ${CMAKE_COMMAND} -E remove_directory ${CMAKE_SOURCE_DIR}/tests/coverage
-    COMMAND mkdir ${CMAKE_SOURCE_DIR}/tests/coverage
-    COMMAND tests
-    COMMAND gcovr --root ${CMAKE_SOURCE_DIR} --exclude '.*/tests/.*' --exclude '.*/CMakeFiles/.*' --exclude '.*/build/.*' --html --html-details -o ${CMAKE_SOURCE_DIR}/tests/coverage/index.html
-    WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
-    COMMENT "Generating code coverage report..."
-  )
-
-  add_subdirectory(./tests/)
-endif()
+import(compiler ON)
 
 ###===================================================================================##
 
 set(HEADERS
-    ./native/include/window.hpp
-    ./native/include/renderer.hpp
+  ./native/include/window.hpp
+  ./native/include/renderer.hpp
 )
 
 set(SOURCES
-    ./native/src/renderer.cpp
-    ./native/src/window.cpp
+  ./native/src/renderer.cpp
+  ./native/src/window.cpp
 )
 
-add_library(${PROJECT_NAME} SHARED ${HEADERS} ${SOURCES})
-target_include_directories(${PROJECT_NAME} PRIVATE ./native/include/)
-
-###===================================================================================##
-
-find_package(fmt CONFIG REQUIRED)
-target_link_libraries(${PROJECT_NAME} PUBLIC fmt::fmt-header-only)
-
-find_package(SDL2 CONFIG REQUIRED)
-target_link_libraries(${PROJECT_NAME} PUBLIC SDL2::SDL2)
-
-if(BUILD_WASM)
-  set(glad_DIR "./build/web/build/Debug/generators")
+if (OUTPUT_TYPE STREQUAL "executable")
+  import(executable OFF)
 else()
-  set(glad_DIR "./build/app/build/Debug/generators")
+  import(library OFF)
 endif()
 
-find_package(glad CONFIG REQUIRED)
-target_link_libraries(${PROJECT_NAME} PUBLIC glad::glad)
-
-find_package(OpenGL REQUIRED)
-target_link_libraries(${PROJECT_NAME} PUBLIC ${OPENGL_LIBRARIES})
-target_include_directories(${PROJECT_NAME} PUBLIC ${OPENGL_INCLUDE_DIR})
-
-
 ###===================================================================================##
 
-add_executable(${PROJECT_NAME}-engine ${HEADERS} ${SOURCES} ./native/src/main.cpp)
-target_include_directories(${PROJECT_NAME}-engine PRIVATE ./native/include/)
-target_link_libraries(${PROJECT_NAME}-engine PUBLIC ${PROJECT_NAME})
-
-include_os(cpack)
+import(tests OFF)
+import(dependencies OFF)
+import(cpack ON)
