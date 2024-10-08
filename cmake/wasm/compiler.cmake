@@ -13,7 +13,8 @@ if(BUILD_DOTNET)
 endif()
 
 set_target_properties(${PROJECT_NAME} PROPERTIES
-  LINK_FLAGS "-s WASM=1 -s EXPORTED_FUNCTIONS='[\"_main\"]'"
+  OUTPUT_NAME "wind"
+  LINK_FLAGS "-s SIDE_MODULE=1"
 )
 
 ###===================================================================================##
