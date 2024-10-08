@@ -106,8 +106,8 @@ jobs:
               os: 'windows-latest',
               conanBuildType: 'Debug',
               dotnetBuildType: 'build',
-              cc: 'clang',
-              cxx: 'clang++',
+              cc: 'cl',
+              cxx: 'cl',
               isRelease: false,
             }
           - {

@@ -109,8 +109,8 @@ jobs:
               os: 'windows-latest',
               dotnetBuildType: 'publish',
               conanBuildType: 'Release',
-              cc: 'clang',
-              cxx: 'clang++',
+              cc: 'cl',
+              cxx: 'cl',
               isRelease: true,
             }
           - {
