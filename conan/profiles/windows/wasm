@@ -1,6 +1,5 @@
 [settings]
 arch=wasm
-build_type=${{ env.conanBuildType }}
 compiler=msvc
 compiler.version=193
 compiler.runtime=dynamic
