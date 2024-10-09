@@ -16,8 +16,11 @@ conan-deploy
 [Oo]bj/
 [Bb]uild/
 [Tt]emp/
+[Tt]mp/
 [Ll]ogs/
 [Rr]eleases/
 
+emcc-cache
+/.cache/
 !/.github/**
 !/.vscode/**

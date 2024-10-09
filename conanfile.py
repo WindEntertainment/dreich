@@ -10,12 +10,17 @@ class MyConanFile(ConanFile):
   settings = "os", "compiler", "build_type", "arch"
   generators = "CMakeDeps", "CMakeToolchain"
   exports_sources = "*"
-  requires = [
-    "boost/1.85.0",
-    # "sdl/2.30.7"
-  ]
+
+  def requirements(self):
+    if self.settings.os != "Windows":
+      self.requires("boost/1.85.0")
+    self.requires("sdl/2.30.7")
+    self.requires("fmt/11.0.2")
+    self.requires("glad/0.1.36")
 
   options = {
+    # "*:shared": [None, True, False],
+    "boost/*:header_only": [None, True, False],
     "boost/*:header_only": [None, True, False],
     "boost/*:without_charconv": [None, True, False],
     "boost/*:without_container": [None, True, False],
@@ -55,6 +60,34 @@ class MyConanFile(ConanFile):
   }
 
   default_options = {
+    # "*:shared": True,
+    # "boost/*:shared": False,
+    # "sdl/*:shared": True,
+    # "fmt/*:shared": True,
+    # "glad/*:shared": True,
+
+    "fmt/*:header_only": True,
+    "sdl/*:directx": False,
+    "sdl/*:alsa": False,
+    "sdl/*:jack": False,
+    "sdl/*:pulse": False,
+    "sdl/*:sndio": False,
+    "sdl/*:nas": False,
+    "sdl/*:esd": False,
+    "sdl/*:arts": False,
+    "sdl/*:xcursor": False,
+    "sdl/*:xinerama": False,
+    "sdl/*:xinput": False,
+    "sdl/*:xrandr": False,
+    "sdl/*:xscrnsaver": False,
+    "sdl/*:xshape": False,
+    "sdl/*:xvm": False,
+    "sdl/*:wayland": False,
+    "sdl/*:directfb": False,
+    "sdl/*:video_": False,
+    "sdl/*:sdl2main": False,
+    "sdl/*:vulkan": False,
+    "sdl/*:libunwind": False,
     "boost/*:header_only": False,
     "boost/*:without_charconv": False,
     "boost/*:without_container": False,

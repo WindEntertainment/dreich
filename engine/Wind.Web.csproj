@@ -1,0 +1,21 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.WebAssembly">
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <OutputPath>bin\$(Configuration)\web\</OutputPath>
+    <OutputType>Library</OutputType>
+    <WasmEnableExperimentalFeatures>true</WasmEnableExperimentalFeatures>
+    <RootNamespace>wind</RootNamespace>
+    <Nullable>enable</Nullable>
+    <PublishTrimmed>true</PublishTrimmed>
+    <RunAOTCompilation>true</RunAOTCompilation>
+    <DefineConstants>$(DefineConstants);web</DefineConstants>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="OpenGL.Net" Version="0.8.4" />
+    <PackageReference Include="SDL2-CS.NetCore" Version="2.0.8" />
+    <PackageReference Include="YamlDotNet" Version="16.1.0" />
+  </ItemGroup>
+</Project>

@@ -3,47 +3,47 @@ cmake_minimum_required(VERSION 3.22)
 project(wind)
 
 message("Building with CMake version: ${CMAKE_VERSION}")
+message("WASM: ${BUILD_WASM}")
+message("Output type: ${OUTPUT_TYPE}")
+message(".Net: ${BUILD_DOTNET}")
+
+if (BUILD_WASM)
+  set(OUTPUT_TYPE "executable")
+endif()
+
+include(${CMAKE_SOURCE_DIR}/cmake/utils.cmake)
+
+###===================================================================================##
+
+list(APPEND CMAKE_PREFIX_PATH "${CMAKE_BINARY_DIR}")
 
 set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+set(CMAKE_POSITION_INDEPENDENT_CODE ON)
 
-set(MATH_LIB math)
-set(RENDERER_LIB renderer)
-set(LOGGER_LIB logger)
+###===================================================================================##
 
-add_compile_options(-fms-extensions)
-
-if(ENABLE_TESTS AND CMAKE_BUILD_TYPE STREQUAL "Debug")
-  message("Testing enabled")
-
-  enable_testing()
-  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} --coverage -fprofile-arcs -ftest-coverage")
-
-  add_custom_target(coverage
-    COMMAND ${CMAKE_COMMAND} -E remove_directory ${CMAKE_SOURCE_DIR}/tests/coverage
-    COMMAND mkdir ${CMAKE_SOURCE_DIR}/tests/coverage
-    COMMAND tests
-    COMMAND gcovr --root ${CMAKE_SOURCE_DIR} --exclude '.*/tests/.*' --exclude '.*/CMakeFiles/.*' --exclude '.*/build/.*' --html --html-details -o ${CMAKE_SOURCE_DIR}/tests/coverage/index.html
-    WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
-    COMMENT "Generating code coverage report..."
-  )
-
-  add_subdirectory(./tests/)
-endif()
-
-add_subdirectory(./Math/Native/)
-add_subdirectory(./Renderer/Native)
-add_subdirectory(./Logger/Native)
-
-add_library(${PROJECT_NAME} SHARED empty.cpp)
-target_link_libraries(${PROJECT_NAME} ${MATH_LIB} ${RENDERER_LIB} ${LOGGER_LIB})
-
-add_custom_command(TARGET ${PROJECT_NAME}
-  POST_BUILD
-  COMMAND dotnet publish
-  WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
-  COMMENT "Running dotnet publish"
+set(HEADERS
+  ./native/include/window.hpp
+  ./native/include/renderer.hpp
 )
 
-include(cpack/cpack.cmake)
+set(SOURCES
+  ./native/src/renderer.cpp
+  ./native/src/window.cpp
+)
+
+if (OUTPUT_TYPE STREQUAL "executable")
+  import(executable OFF)
+else()
+  import(library OFF)
+endif()
+
+import(compiler ON)
+
+###===================================================================================##
+
+import(tests OFF)
+import(dependencies OFF)
+import(cpack ON)
