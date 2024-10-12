@@ -14,5 +14,6 @@
     "scancode",
     "WINDOWPOS"
   ],
-  "cmake.sourceDirectory": "/Users/stasangoliuk/Desktop/charp"
+  "cmake.sourceDirectory": "/Users/stasangoliuk/Desktop/charp",
+  "C_Cpp.errorSquiggles": "enabled"
 }

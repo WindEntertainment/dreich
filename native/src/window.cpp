@@ -1,4 +1,3 @@
-
 #ifdef _WIN32
 #include <SDL.h>
 #include <SDL_error.h>
@@ -6,10 +5,11 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_error.h>
 #endif
+
 #include <glad/glad.h>
 
-#include "logger.hpp"
-#include "window.hpp"
+#include "native/logger.hpp"
+#include "native/window.hpp"
 
 ILoggerStream* Logger::stream = new ConsoleStream();
 Logger Logger::native = Logger();

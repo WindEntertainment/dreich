@@ -24,16 +24,6 @@ set(CMAKE_POSITION_INDEPENDENT_CODE ON)
 
 ###===================================================================================##
 
-set(HEADERS
-  ./native/include/window.hpp
-  ./native/include/renderer.hpp
-)
-
-set(SOURCES
-  ./native/src/renderer.cpp
-  ./native/src/window.cpp
-)
-
 if (OUTPUT_TYPE STREQUAL "executable")
   import(executable OFF)
 else()

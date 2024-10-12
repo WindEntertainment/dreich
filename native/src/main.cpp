@@ -1,6 +1,5 @@
-#include "logger.hpp"
-#include "renderer.hpp"
-#include "window.hpp"
+#include "native/logger.hpp"
+#include "native/window.hpp"
 
 int main() {
   windInitRenderer();
