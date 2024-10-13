@@ -90,7 +90,7 @@ jobs:
           - {
               name: 'Windows',
               wasm: 'false',
-              projectRoot: 'D:/a/dreich',
+              projectRoot: 'D:/a/dreich/dreich',
               artifact: '${{ github.event.pull_request.title }}',
               os: 'windows-latest',
               dotnetBuildType: 'publish',
@@ -154,7 +154,7 @@ jobs:
           - {
               wasm: 'true',
               name: 'Windows',
-              projectRoot: 'D:/a/dreich',
+              projectRoot: 'D:/a/dreich/dreich',
               artifact: 'dreich-windows',
               os: 'windows-latest',
               dotnetBuildType: 'build',
