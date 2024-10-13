@@ -17,7 +17,6 @@ runs:
     - name: Set up dotnet
       uses: actions/setup-dotnet@v4
       with:
-        cache: true
         dotnet-version: '8.0.x'
 
     - uses: tecolicom/actions-install-and-cache@v1
