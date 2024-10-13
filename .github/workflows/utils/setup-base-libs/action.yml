@@ -17,9 +17,17 @@ runs:
     - name: Set up dotnet
       uses: actions/setup-dotnet@v4
       with:
+        cache: true
         dotnet-version: '8.0.x'
 
-    - name: Install dotnet wasm tools
-      shell: bash
-      run: |
-        dotnet workload install wasm-tools
+    - uses: tecolicom/actions-install-and-cache@v1
+      name: Install dotnet wasm tools
+      with:
+        run: |
+          echo $DOTNET_ROOT
+          echo ${{env.DOTNET_ROOT}}
+          dotnet workload install wasm-tools
+        path: $DOTNET_ROOT
+        cache: yes
+        key: ${{ env.envHash }}-${{ env.os }}-dotnet-wasm
+        sudo: false
