@@ -12,7 +12,7 @@ while [[ "$#" -gt 0 ]]; do
     -wc|--with-coverage) with_coverage=true; ;;
     -wd|--with-dependencies) with_dependencies=true; ;;
     --root) root="$2"; shift; ;;
-    *) echo "Unknown parameter passed: $1"; exit; ;;
+    *) echo "Unknown parameter passed: $1" ;;
   esac
   shift
 done
@@ -26,7 +26,7 @@ fi
 
 wm run cmake-configure --build-type Debug --with-testing
 
-cd "$root/build/Debug/tests" || exit
+cd "$root/build/app/build/Debug/tests" || exit
 
 make
 ctest

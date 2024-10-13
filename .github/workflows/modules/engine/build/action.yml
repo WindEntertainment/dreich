@@ -7,6 +7,16 @@ runs:
     - name: Prepare engine env
       uses: ./.github/workflows/modules/engine/setup-env
 
-    - name: Build
+    - name: Build engine with wm
+      if: env.wasm == 'false'
       shell: bash
-      run: dotnet ${{ env.dotnetBuildType }}
+      run: |
+        cd ${{env.projectRoot}}/engine
+        dotnet ${{ env.dotnetBuildType }} Wind.csproj
+
+    - name: Build engine wasm with wm
+      if: env.wasm == 'true'
+      shell: bash
+      run: |
+        cd ${{env.projectRoot}}/engine
+        dotnet ${{ env.dotnetBuildType }} Wind.Web.csproj

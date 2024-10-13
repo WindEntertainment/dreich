@@ -23,9 +23,9 @@ if echo "$OS" | grep -qi "Windows"; then
 
   source "$bash_profile"
 else
-  symlink_origin_path="$(pwd)/wm"
   sudo chmod +x wm
 
+  symlink_origin_path="$(pwd)/wm"
   symlink_path='/usr/local/bin/wm'
 
   ln -sf "$symlink_origin_path"  $symlink_path

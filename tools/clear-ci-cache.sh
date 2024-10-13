@@ -10,7 +10,7 @@ cd "$root" || exit
 while [[ "$#" -gt 0 ]]; do
   case $1 in
     --root) root="$2"; shift ;;
-    *) echo "Unknown parameter passed: $1"; exit 1 ;;
+    *) echo "Unknown parameter passed: $1" ;;
   esac
   shift
 done
@@ -18,7 +18,7 @@ done
 response=$(gh api \
   -H "Accept: application/vnd.github+json" \
   -H "X-GitHub-Api-Version: 2022-11-28" \
-  /repos/Dronner-Inc/dreich/actions/caches)
+  /repos/WindEntertainment/dreich/actions/caches)
 
 if [ $? -eq 0 ]; then
   cache_ids=$(echo "$response" | jq -r '.actions_caches[].id')
@@ -30,7 +30,7 @@ if [ $? -eq 0 ]; then
       --method DELETE \
       -H "Accept: application/vnd.github+json" \
       -H "X-GitHub-Api-Version: 2022-11-28" \
-      /repos/Dronner-Inc/dreich/actions/caches/"$cache_id")
+      /repos/WindEntertainment/dreich/actions/caches/"$cache_id")
 
     echo "$delete_result"
   done

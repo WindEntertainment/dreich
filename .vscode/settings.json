@@ -1,6 +1,7 @@
 {
   "files.exclude": {
-    "obj": true
+    "obj": true,
+    ".cache": true
   },
   "dotnet.defaultSolution": "wind-csharp.sln",
   "cSpell.words": [
@@ -13,5 +14,6 @@
     "scancode",
     "WINDOWPOS"
   ],
-  "cmake.sourceDirectory": "/home/neutrinozh/Dev/charp-test/Renderer"
+  "cmake.sourceDirectory": "/Users/stasangoliuk/Desktop/charp",
+  "C_Cpp.errorSquiggles": "enabled"
 }
