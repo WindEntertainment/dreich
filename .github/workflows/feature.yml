@@ -32,9 +32,6 @@ jobs:
               artifact: 'dreich-linux',
               os: 'ubuntu-latest',
               dotnetBuildType: 'build',
-              conanBuildType: 'Debug',
-              cc: 'clang',
-              cxx: 'clang++',
               isRelease: false,
             }
     steps:
@@ -47,8 +44,6 @@ jobs:
         uses: './.github/workflows/utils/json-to-env'
         with:
           json: ${{ toJSON(matrix.config) }}
-      - name: Native
-        uses: './.github/workflows/modules/native/lint'
       - name: Engine
         uses: './.github/workflows/modules/engine/lint'
       - name: Linting commit
@@ -68,9 +63,6 @@ jobs:
               artifact: 'dreich-macos',
               os: 'macos-14',
               dotnetBuildType: 'build',
-              conanBuildType: 'Debug',
-              cc: 'clang',
-              cxx: 'clang++',
               isRelease: false,
             }
     steps:
@@ -84,12 +76,6 @@ jobs:
         with:
           json: ${{ toJSON(matrix.config) }}
       - uses: ./.github/workflows/utils/setup-base-libs
-      - name: Ctest
-        shell: bash
-        run: |
-          export CC=${{ env.cc }}
-          export CXX=${{ env.cxx }}
-          wm run ctest
       - name: Engine
         uses: './.github/workflows/modules/engine/test'
 
@@ -103,13 +89,10 @@ jobs:
           - {
               name: 'Windows',
               wasm: 'false',
-              projectRoot: 'D:/a/dreich',
+              projectRoot: 'D:/a/dreich/dreich',
               artifact: 'dreich-windows',
               os: 'windows-latest',
               dotnetBuildType: 'build',
-              conanBuildType: 'Debug',
-              cc: 'cl',
-              cxx: 'cl',
               isRelease: false,
             }
           - {
@@ -119,9 +102,6 @@ jobs:
               artifact: 'dreich-linux',
               os: 'ubuntu-latest',
               dotnetBuildType: 'build',
-              conanBuildType: 'Debug',
-              cc: 'clang',
-              cxx: 'clang++',
               isRelease: false,
             }
           - {
@@ -131,9 +111,6 @@ jobs:
               artifact: 'dreich-macos',
               os: 'macos-14',
               dotnetBuildType: 'build',
-              conanBuildType: 'Debug',
-              cc: 'clang',
-              cxx: 'clang++',
               isRelease: false,
             }
     steps:
@@ -147,8 +124,6 @@ jobs:
         with:
           json: ${{ toJSON(matrix.config) }}
       - uses: ./.github/workflows/utils/setup-base-libs
-      - name: Native
-        uses: './.github/workflows/modules/native/build'
       - name: Engine
         uses: './.github/workflows/modules/engine/build'
 
@@ -162,13 +137,10 @@ jobs:
           - {
               wasm: 'true',
               name: 'Windows',
-              projectRoot: 'D:/a/dreich',
+              projectRoot: 'D:/a/dreich/dreich',
               artifact: 'dreich-windows',
               os: 'windows-latest',
               dotnetBuildType: 'build',
-              conanBuildType: 'Debug',
-              cc: 'emcc',
-              cxx: 'em++',
               isRelease: false,
             }
           - {
@@ -178,9 +150,6 @@ jobs:
               artifact: 'dreich-linux',
               os: 'ubuntu-latest',
               dotnetBuildType: 'build',
-              conanBuildType: 'Debug',
-              cc: 'emcc',
-              cxx: 'em++',
               isRelease: false,
             }
           - {
@@ -190,9 +159,6 @@ jobs:
               artifact: 'dreich-macos',
               os: 'macos-14',
               dotnetBuildType: 'build',
-              conanBuildType: 'Debug',
-              cc: 'emcc',
-              cxx: 'em++',
               isRelease: false,
             }
     steps:
@@ -206,7 +172,5 @@ jobs:
         with:
           json: ${{ toJSON(matrix.config) }}
       - uses: ./.github/workflows/utils/setup-base-libs
-      - name: Native
-        uses: './.github/workflows/modules/native/build'
       - name: Engine
         uses: './.github/workflows/modules/engine/build'
