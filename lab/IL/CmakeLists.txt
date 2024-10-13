@@ -1,0 +1,20 @@
+cmake_minimum_required(VERSION 3.10)
+project(CppCsharpInterop)
+
+# Use Clang
+set(CMAKE_CXX_COMPILER "clang++")
+set(CMAKE_CXX_STANDARD 17)
+
+# C++ source files
+set(SOURCE
+    log.cpp
+    main.cpp
+)
+
+# Build a shared library (DLL)
+add_library(log SHARED ${SOURCE})
+
+# Output DLL to bin directory
+set_target_properties(log PROPERTIES
+    RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin
+)

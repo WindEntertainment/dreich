@@ -1,0 +1,24 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Library</OutputType>
+    <TargetFramework>net9.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+        <PublishAot>true</PublishAot>
+    <!-- Enable LLVM backend -->
+    <IlcUseLLVM>true</IlcUseLLVM>
+    <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+    <!-- Optimize for speed (optional) -->
+    <IlcOptimizationPreference>Speed</IlcOptimizationPreference>
+    <NativeLib>Static</NativeLib>
+  </PropertyGroup>
+
+
+
+  <ItemGroup>
+    <Compile Include="Program.cs" />
+  </ItemGroup>
+
+
+</Project>
