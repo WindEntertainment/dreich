@@ -20,6 +20,7 @@ conan-deploy
 [Ll]ogs/
 [Rr]eleases/
 
+emcc-cache
 /.cache/
 !/.github/**
 !/.vscode/**

@@ -23,8 +23,8 @@ runs:
         export CC=${{ env.cc }}
         export CXX=${{ env.cxx }}
 
-        mkdir -p ~/emscripten_cache
-        unset FROZEN_CACHE
-        export EM_CACHE=~/emscripten_cache
+        if [ "$RUNNER_OS" == "Linux" ]; then
+          source "/home/runner/work/dreich/dreich/emsdk/emsdk_env.sh"
+        fi
 
-        sudo wm run cmake-build -bt ${{ env.conanBuildType }} -w
+        wm run cmake-build -bt ${{ env.conanBuildType }} -w
