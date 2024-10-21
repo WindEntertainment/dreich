@@ -1,6 +1,4 @@
-
 using static SDL2.SDL;
-
 
 namespace Wind {
   public partial class InputSystem {

@@ -86,7 +86,7 @@ namespace Wind {
       GroupedEventToCycle(new(Keycode.AllEvents, KeyAction.Unknown));
     }
 
-    public void onScroll(string sdlWindow, double x, double y) {
+    public void OnScroll(string sdlWindow, double x, double y) {
       if (y > 0) {
         GroupedEventToCycle(new(Keycode.M_ScrollDown, KeyAction.Unknown));
       }
@@ -105,7 +105,7 @@ namespace Wind {
       context.MouseContext.MoveScroll(0, 0);
     }
 
-    public void onCharPress(string sdlWindow, uint codepoint) {
+    public void OnCharPress(string sdlWindow, uint codepoint) {
       context.KeyboardContext.SetCodepoint(codepoint);
       GroupedEventToCycle(new(Keycode.K_AllChars, KeyAction.Unknown));
       context.KeyboardContext.RemoveCodepoint();
